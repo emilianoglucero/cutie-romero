@@ -6,6 +6,12 @@ import { ImprovedNoise } from "three/addons/math/ImprovedNoise.js";
 
 import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 
+// import cloudsVertexShader from "./shaders/clouds/vertex.glsl";
+// import cloudsFragmentShader from "./shaders/clouds/fragment.glsl";
+
+// import rainbowVertexShader from "./shaders/rainbow/vertex.glsl";
+// import rainbowFragmentShader from "./shaders/rainbow/fragment.glsl";
+
 let sky, sun;
 
 const gui = new GUI();
@@ -47,18 +53,26 @@ function initSky() {
     renderer.toneMappingExposure = effectController.exposure;
     renderer.render(scene, camera);
   }
-
-  gui.add(effectController, "turbidity", 0.0, 20.0, 0.1).onChange(guiChanged);
-  gui.add(effectController, "rayleigh", 0.0, 4, 0.001).onChange(guiChanged);
-  gui
+  const skyFolder = gui.addFolder("Sky");
+  skyFolder
+    .add(effectController, "turbidity", 0.0, 20.0, 0.1)
+    .onChange(guiChanged);
+  skyFolder
+    .add(effectController, "rayleigh", 0.0, 4, 0.001)
+    .onChange(guiChanged);
+  skyFolder
     .add(effectController, "mieCoefficient", 0.0, 0.1, 0.001)
     .onChange(guiChanged);
-  gui
+  skyFolder
     .add(effectController, "mieDirectionalG", 0.0, 1, 0.001)
     .onChange(guiChanged);
-  gui.add(effectController, "elevation", 0, 90, 0.1).onChange(guiChanged);
-  gui.add(effectController, "azimuth", -180, 180, 0.1).onChange(guiChanged);
-  gui.add(effectController, "exposure", 0, 1, 0.0001).onChange(guiChanged);
+  skyFolder.add(effectController, "elevation", 0, 90, 0.1).onChange(guiChanged);
+  skyFolder
+    .add(effectController, "azimuth", -180, 180, 0.1)
+    .onChange(guiChanged);
+  skyFolder
+    .add(effectController, "exposure", 0, 1, 0.0001)
+    .onChange(guiChanged);
 
   guiChanged();
 }
@@ -174,7 +188,7 @@ texture.needsUpdate = true;
 
 // Material
 
-const vertexShader = /* glsl */ `
+const cloudsVertexShader = /* glsl */ `
 					in vec3 position;
 
 					uniform mat4 modelMatrix;
@@ -195,7 +209,7 @@ const vertexShader = /* glsl */ `
 					}
 				`;
 
-const fragmentShader = /* glsl */ `
+const cloudsFragmentShader = /* glsl */ `
 					precision highp float;
 					precision highp sampler3D;
 
@@ -321,8 +335,8 @@ const cloudMaterial = new THREE.RawShaderMaterial({
     steps: { value: 100 },
     frame: { value: 0 },
   },
-  vertexShader,
-  fragmentShader,
+  vertexShader: cloudsVertexShader,
+  fragmentShader: cloudsFragmentShader,
   side: THREE.BackSide,
   transparent: true,
 });
@@ -336,6 +350,57 @@ cloud3.position.set(0, 0, 1);
 const cloud4 = new THREE.Mesh(cloudGeometry, cloudMaterial);
 cloud4.position.set(0, 0, -3);
 scene.add(cloud1, cloud2, cloud3, cloud4);
+
+/**
+ * Rainbow
+ */
+
+//Rainbow shgaders
+const rainbowVertexShader = /* glsl */ `
+varying vec2 vUV;
+varying vec3 vNormal;
+void main () {
+  vUV = uv;
+  vNormal = vec3(normal);
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+				`;
+
+const rainbowFragmentShader = /* glsl */ `
+varying vec2 vUV;
+varying vec3 vNormal;
+void main () {
+  vec4 c = vec4(abs(vNormal) + vec3(vUV, 0.0), 0.1); // 设置透明度为0.1
+  gl_FragColor = c;
+}
+`;
+
+//Create a torus rainbow
+const rainbowMaterial = new THREE.ShaderMaterial({
+  vertexShader: rainbowVertexShader,
+  fragmentShader: rainbowFragmentShader,
+  uniforms: {},
+  side: THREE.DoubleSide,
+  transparent: true,
+});
+const rainbowGeometry = new THREE.TorusGeometry(60, 4, 40, 100);
+const rainbow = new THREE.Mesh(rainbowGeometry, rainbowMaterial);
+rainbow.opacity = 0.1;
+rainbow.position.set(23, 3, -31);
+scene.add(rainbow);
+
+// add gui to position rainbow
+const rainbowFolder = gui.addFolder("Rainbow");
+rainbowFolder.add(rainbow.position, "x", -200, 200, 0.01);
+rainbowFolder.add(rainbow.position, "y", -200, 200, 0.01);
+rainbowFolder.add(rainbow.position, "z", -200, 200, 0.01);
+
+// add gui to rotate rainbow
+rainbowFolder.add(rainbow.rotation, "x", -10, 10, 0.01);
+rainbowFolder.add(rainbow.rotation, "y", -10, 10, 0.01);
+rainbowFolder.add(rainbow.rotation, "z", -10, 10, 0.01);
+
+//
 
 // GUI
 
@@ -353,13 +418,11 @@ function update() {
   cloudMaterial.uniforms.steps.value = parameters.steps;
 }
 
-// const gui = new GUI();
-gui.add(parameters, "threshold", 0, 1, 0.01).onChange(update);
-gui.add(parameters, "opacity", 0, 1, 0.01).onChange(update);
-gui.add(parameters, "range", 0, 1, 0.01).onChange(update);
-gui.add(parameters, "steps", 0, 200, 1).onChange(update);
-
-//
+const cloudsFolder = gui.addFolder("Clouds");
+cloudsFolder.add(parameters, "threshold", 0, 1, 0.01).onChange(update);
+cloudsFolder.add(parameters, "opacity", 0, 1, 0.01).onChange(update);
+cloudsFolder.add(parameters, "range", 0, 1, 0.01).onChange(update);
+cloudsFolder.add(parameters, "steps", 0, 200, 1).onChange(update);
 
 /**
  * Animate
