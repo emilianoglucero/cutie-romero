@@ -8,6 +8,8 @@ import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 
 let sky, sun;
 
+const gui = new GUI();
+
 function initSky() {
   // Add Sky
   sky = new Sky();
@@ -46,8 +48,6 @@ function initSky() {
     renderer.render(scene, camera);
   }
 
-  const gui = new GUI();
-
   gui.add(effectController, "turbidity", 0.0, 20.0, 0.1).onChange(guiChanged);
   gui.add(effectController, "rayleigh", 0.0, 4, 0.001).onChange(guiChanged);
   gui
@@ -66,8 +66,6 @@ function initSky() {
 /**
  * Base
  */
-// Debug
-const gui = new dat.GUI();
 
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
@@ -338,6 +336,28 @@ cloud3.position.set(0, 0, 1);
 const cloud4 = new THREE.Mesh(cloudGeometry, cloudMaterial);
 cloud4.position.set(0, 0, -3);
 scene.add(cloud1, cloud2, cloud3, cloud4);
+
+// GUI
+
+const parameters = {
+  threshold: 0.25,
+  opacity: 0.25,
+  range: 0.1,
+  steps: 100,
+};
+
+function update() {
+  cloudMaterial.uniforms.threshold.value = parameters.threshold;
+  cloudMaterial.uniforms.opacity.value = parameters.opacity;
+  cloudMaterial.uniforms.range.value = parameters.range;
+  cloudMaterial.uniforms.steps.value = parameters.steps;
+}
+
+// const gui = new GUI();
+gui.add(parameters, "threshold", 0, 1, 0.01).onChange(update);
+gui.add(parameters, "opacity", 0, 1, 0.01).onChange(update);
+gui.add(parameters, "range", 0, 1, 0.01).onChange(update);
+gui.add(parameters, "steps", 0, 200, 1).onChange(update);
 
 //
 
