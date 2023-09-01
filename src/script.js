@@ -4,7 +4,9 @@ import * as dat from "lil-gui";
 import { Sky } from "three/addons/objects/Sky.js";
 import { ImprovedNoise } from "three/addons/math/ImprovedNoise.js";
 import * as TWEEN from "@tweenjs/tween.js";
-
+import { TTFLoader } from "three/examples/jsm/loaders/TTFLoader.js";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import { Font } from "three/examples/jsm/loaders/FontLoader.js";
 import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 
 // import cloudsVertexShader from "./shaders/clouds/vertex.glsl";
@@ -12,6 +14,45 @@ import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 
 // import rainbowVertexShader from "./shaders/rainbow/vertex.glsl";
 // import rainbowFragmentShader from "./shaders/rainbow/fragment.glsl";
+
+/**
+ * Textures
+ */
+const textureLoader = new THREE.TextureLoader();
+
+/**
+ * 3D Text
+ */
+const fontLoader = new TTFLoader();
+const matcapTexture = textureLoader.load("/textures/matcaps/1.png");
+console.log(matcapTexture);
+fontLoader.load("/fonts/Playball-Regular.ttf", (fontData) => {
+  console.log(fontData);
+  // Convert the parsed fontData to the format Three.js understands
+  const font = new Font(fontData);
+
+  // Create the text geometry
+  const textGeometry = new TextGeometry("Cutie Romero", {
+    font: font,
+    size: 0.5,
+    height: 0.2,
+    curveSegments: 12,
+    bevelEnabled: true,
+    bevelThickness: 0.03,
+    bevelSize: 0.02,
+    bevelOffset: 0,
+    bevelSegments: 5,
+  });
+
+  // Create a standard material with red color and 50% gloss
+  const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
+
+  // Geometries are attached to meshes so that they get rendered
+  const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+  // Update positioning of the text
+  textMesh.position.set(-2, 0, 0);
+  scene.add(textMesh);
+});
 
 let sky, sun;
 
@@ -87,11 +128,6 @@ const canvas = document.querySelector("canvas.webgl");
 
 // Scene
 const scene = new THREE.Scene();
-
-/**
- * Textures
- */
-const textureLoader = new THREE.TextureLoader();
 
 /**
  * Sizes
@@ -347,7 +383,7 @@ cloud1.position.set(2, 0, -1);
 const cloud2 = new THREE.Mesh(cloudGeometry, cloudMaterial);
 cloud2.position.set(-2, 0, -1);
 const cloud3 = new THREE.Mesh(cloudGeometry, cloudMaterial);
-cloud3.position.set(0, 0, 1);
+cloud3.position.set(0, 0, 3);
 const cloud4 = new THREE.Mesh(cloudGeometry, cloudMaterial);
 cloud4.position.set(0, 0, -3);
 scene.add(cloud1, cloud2, cloud3, cloud4);
