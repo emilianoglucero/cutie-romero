@@ -54,6 +54,9 @@ fontLoader.load("/fonts/Playball-Regular.ttf", (fontData) => {
   scene.add(textMesh);
 });
 
+/*
+ * Sky
+ */
 let sky, sun;
 
 const gui = new GUI();
@@ -676,6 +679,278 @@ function rnd(max, negative) {
 }
 
 initButterflies();
+
+/**
+ * Cuti Group of Images
+ */
+function cutiImagePlane() {
+  const cutiImagePlaneGroup = new THREE.Group();
+  const cutiImagePlane1 = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1, 1, 1),
+    new THREE.MeshBasicMaterial({
+      map: textureLoader.load("/textures/cuti-plane/cuti-1.webp"),
+      side: THREE.DoubleSide,
+    })
+  );
+  cutiImagePlane1.scale.set(1.5, 1.5, 1.5);
+  cutiImagePlane1.position.set(-0.94, -0.84, -0.59);
+  cutiImagePlane1.rotation.set(0.59, 0, 0);
+
+  const cutiImagePlane2 = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1, 1, 1),
+    new THREE.MeshBasicMaterial({
+      map: textureLoader.load("/textures/cuti-plane/cuti-2.webp"),
+      side: THREE.DoubleSide,
+    })
+  );
+  cutiImagePlane2.scale.set(1.5, 1.5, 1.5);
+  cutiImagePlane2.position.set(-0.18, 0.59, -0.69);
+  cutiImagePlane2.rotation.set(0.59, 0, 0);
+
+  const cutiImagePlane3 = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1, 1, 1),
+    new THREE.MeshBasicMaterial({
+      map: textureLoader.load("/textures/cuti-plane/cuti-3.webp"),
+      side: THREE.DoubleSide,
+    })
+  );
+  cutiImagePlane3.scale.set(1.5, 1.5, 1.5);
+  cutiImagePlane3.position.set(0.46, -0.65, 0);
+  cutiImagePlane3.rotation.set(5.88, 2.75, -0.34);
+
+  const cutiImagePlane4 = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1, 1, 1),
+    new THREE.MeshBasicMaterial({
+      map: textureLoader.load("/textures/cuti-plane/cuti-4.webp"),
+      side: THREE.DoubleSide,
+    })
+  );
+  cutiImagePlane4.scale.set(1.5, 1.5, 1.5);
+  cutiImagePlane4.position.set(1.48, 0, -0.16);
+  cutiImagePlane4.rotation.set(0, -0.92, 0.13);
+
+  const cutiImagePlane5 = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1, 1, 1),
+    new THREE.MeshBasicMaterial({
+      map: textureLoader.load("/textures/cuti-plane/cuti-5.webp"),
+      side: THREE.DoubleSide,
+    })
+  );
+  cutiImagePlane5.scale.set(1.5, 1.5, 1.5);
+  cutiImagePlane5.position.set(-1.63, 0.44, -0.62);
+  cutiImagePlane5.rotation.set(-2.84, 0.19, 0.72);
+
+  const cutiImagePlane6 = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1, 1, 1),
+    new THREE.MeshBasicMaterial({
+      map: textureLoader.load("/textures/cuti-plane/cuti-6.webp"),
+      side: THREE.DoubleSide,
+    })
+  );
+  cutiImagePlane6.scale.set(1.5, 1.5, 1.5);
+  cutiImagePlane6.position.set(0.44, 1.45, 0.93);
+  cutiImagePlane6.rotation.set(0, 7.4, 0);
+
+  const cutiImagePlane7 = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1, 1, 1),
+    new THREE.MeshBasicMaterial({
+      map: textureLoader.load("/textures/cuti-plane/cuti-7.webp"),
+      side: THREE.DoubleSide,
+    })
+  );
+  cutiImagePlane7.scale.set(1.5, 1.5, 1.5);
+  cutiImagePlane7.position.set(0.67, -0.42, -0.93);
+  cutiImagePlane7.rotation.set(0, 3.92, 0);
+
+  const cutiImagePlane8 = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1, 1, 1),
+    new THREE.MeshBasicMaterial({
+      map: textureLoader.load("/textures/cuti-plane/cuti-8.webp"),
+      side: THREE.DoubleSide,
+    })
+  );
+  cutiImagePlane8.scale.set(1.5, 1.5, 1.5);
+  cutiImagePlane8.position.set(-0.64, 1.98, -0.68);
+  cutiImagePlane8.rotation.set(0, 0.65, 0.66);
+
+  //add gui to all planes for position and rotation
+  const cutiImagePlaneFolder = gui.addFolder("Cuti Image Plane");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane1.position, "x", -10, 10, 0.01)
+    .name("cutiImagePlane1 x position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane1.position, "y", -10, 10, 0.01)
+    .name("cutiImagePlane1 y position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane1.position, "z", -10, 10, 0.01)
+    .name("cutiImagePlane1 z position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane1.rotation, "x", -10, 10, 0.01)
+    .name("cutiImagePlane1 x rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane1.rotation, "y", -10, 10, 0.01)
+    .name("cutiImagePlane1 y rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane1.rotation, "z", -10, 10, 0.01)
+    .name("cutiImagePlane1 z rotation");
+
+  cutiImagePlaneFolder
+    .add(cutiImagePlane2.position, "x", -10, 10, 0.01)
+    .name("cutiImagePlane2 x position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane2.position, "y", -10, 10, 0.01)
+    .name("cutiImagePlane2 y position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane2.position, "z", -10, 10, 0.01)
+    .name("cutiImagePlane2 z position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane2.rotation, "x", -10, 10, 0.01)
+    .name("cutiImagePlane2 x rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane2.rotation, "y", -10, 10, 0.01)
+    .name("cutiImagePlane2 y rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane2.rotation, "z", -10, 10, 0.01)
+    .name("cutiImagePlane2 z rotation");
+
+  cutiImagePlaneFolder
+    .add(cutiImagePlane3.position, "x", -10, 10, 0.01)
+    .name("cutiImagePlane3 x position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane3.position, "y", -10, 10, 0.01)
+    .name("cutiImagePlane3 y position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane3.position, "z", -10, 10, 0.01)
+    .name("cutiImagePlane3 z position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane3.rotation, "x", -10, 10, 0.01)
+    .name("cutiImagePlane3 x rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane3.rotation, "y", -10, 10, 0.01)
+    .name("cutiImagePlane3 y rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane3.rotation, "z", -10, 10, 0.01)
+    .name("cutiImagePlane3 z rotation");
+
+  cutiImagePlaneFolder
+    .add(cutiImagePlane4.position, "x", -10, 10, 0.01)
+    .name("cutiImagePlane4 x position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane4.position, "y", -10, 10, 0.01)
+    .name("cutiImagePlane4 y position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane4.position, "z", -10, 10, 0.01)
+    .name("cutiImagePlane4 z position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane4.rotation, "x", -10, 10, 0.01)
+    .name("cutiImagePlane4 x rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane4.rotation, "y", -10, 10, 0.01)
+    .name("cutiImagePlane4 y rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane4.rotation, "z", -10, 10, 0.01)
+    .name("cutiImagePlane4 z rotation");
+
+  cutiImagePlaneFolder
+    .add(cutiImagePlane5.position, "x", -10, 10, 0.01)
+    .name("cutiImagePlane5 x position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane5.position, "y", -10, 10, 0.01)
+    .name("cutiImagePlane5 y position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane5.position, "z", -10, 10, 0.01)
+    .name("cutiImagePlane5 z position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane5.rotation, "x", -10, 10, 0.01)
+    .name("cutiImagePlane5 x rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane5.rotation, "y", -10, 10, 0.01)
+    .name("cutiImagePlane5 y rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane5.rotation, "z", -10, 10, 0.01)
+    .name("cutiImagePlane5 z rotation");
+
+  cutiImagePlaneFolder
+    .add(cutiImagePlane6.position, "x", -10, 10, 0.01)
+    .name("cutiImagePlane6 x position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane6.position, "y", -10, 10, 0.01)
+    .name("cutiImagePlane6 y position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane6.position, "z", -10, 10, 0.01)
+    .name("cutiImagePlane6 z position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane6.rotation, "x", -10, 10, 0.01)
+    .name("cutiImagePlane6 x rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane6.rotation, "y", -10, 10, 0.01)
+    .name("cutiImagePlane6 y rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane6.rotation, "z", -10, 10, 0.01)
+    .name("cutiImagePlane6 z rotation");
+
+  cutiImagePlaneFolder
+    .add(cutiImagePlane7.position, "x", -10, 10, 0.01)
+    .name("cutiImagePlane7 x position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane7.position, "y", -10, 10, 0.01)
+    .name("cutiImagePlane7 y position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane7.position, "z", -10, 10, 0.01)
+    .name("cutiImagePlane7 z position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane7.rotation, "x", -10, 10, 0.01)
+    .name("cutiImagePlane7 x rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane7.rotation, "y", -10, 10, 0.01)
+    .name("cutiImagePlane7 y rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane7.rotation, "z", -10, 10, 0.01)
+    .name("cutiImagePlane7 z rotation");
+
+  cutiImagePlaneFolder
+    .add(cutiImagePlane8.position, "x", -10, 10, 0.01)
+    .name("cutiImagePlane8 x position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane8.position, "y", -10, 10, 0.01)
+    .name("cutiImagePlane8 y position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane8.position, "z", -10, 10, 0.01)
+    .name("cutiImagePlane8 z position");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane8.rotation, "x", -10, 10, 0.01)
+    .name("cutiImagePlane8 x rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane8.rotation, "y", -10, 10, 0.01)
+    .name("cutiImagePlane8 y rotation");
+  cutiImagePlaneFolder
+    .add(cutiImagePlane8.rotation, "z", -10, 10, 0.01)
+    .name("cutiImagePlane8 z rotation");
+
+  cutiImagePlaneGroup.add(
+    cutiImagePlane1,
+    cutiImagePlane2,
+    cutiImagePlane3,
+    cutiImagePlane4,
+    cutiImagePlane5,
+    cutiImagePlane6,
+    cutiImagePlane7,
+    cutiImagePlane8
+  );
+  cutiImagePlaneGroup.position.set(-1.7, 1, -10);
+  gui
+    .add(cutiImagePlaneGroup.position, "x", -10, 10, 0.01)
+    .name("Group x position");
+  gui
+    .add(cutiImagePlaneGroup.position, "y", -10, 10, 0.01)
+    .name("Group y position");
+  gui
+    .add(cutiImagePlaneGroup.position, "z", -10, 10, 0.01)
+    .name("Group z position");
+
+  scene.add(cutiImagePlaneGroup);
+}
+cutiImagePlane();
 
 /**
  * Animate
