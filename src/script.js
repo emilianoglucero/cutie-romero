@@ -9,6 +9,7 @@ import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 import { Font } from "three/examples/jsm/loaders/FontLoader.js";
 import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 import { FBXLoader } from "three/addons/loaders/FBXLoader.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import Stats from "stats-gl";
 
 /**
@@ -121,6 +122,32 @@ fontLoader.load("/fonts/Playball-Regular.ttf", (fontData) => {
   // Update positioning of the text
   textMesh.position.set(-2, 0, 0);
   scene.add(textMesh);
+});
+
+/**
+ * Heart Title model
+ */
+const gltfLoader = new GLTFLoader();
+gltfLoader.load("models/gltf/stylized_heart_model/scene.gltf", (gltf) => {
+  console.log(gltf);
+  const title = gltf.scene.children[0];
+  title.scale.set(1, 1, 1);
+  title.position.set(0.08, 0.33, -0.43);
+  scene.add(title);
+
+  //gui for title model
+  const titleFolder = gui.addFolder("Title Model");
+  titleFolder.add(title.position, "x", -10, 10, 0.01).name("title x");
+  titleFolder.add(title.position, "y", -10, 10, 0.01).name("title y");
+  titleFolder.add(title.position, "z", -10, 10, 0.01).name("title z");
+
+  titleFolder.add(title.rotation, "x", -10, 10, 0.01).name("title rx");
+  titleFolder.add(title.rotation, "y", -10, 10, 0.01).name("title ry");
+  titleFolder.add(title.rotation, "z", -10, 10, 0.01).name("title rz");
+
+  titleFolder.add(title.scale, "x", -10, 10, 0.01).name("title sx");
+  titleFolder.add(title.scale, "y", -10, 10, 0.01).name("title sy");
+  titleFolder.add(title.scale, "z", -10, 10, 0.01).name("title sz");
 });
 
 /*
