@@ -13,6 +13,7 @@
   "dependencies": {
     "@tweenjs/tween.js": "^21.0.0",
     "lil-gui": "^0.18.1",
+    "stats-gl": "^1.0.5",
     "three": "^0.153.0"
   }
 }

@@ -8,6 +8,47 @@ import { TTFLoader } from "three/examples/jsm/loaders/TTFLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 import { Font } from "three/examples/jsm/loaders/FontLoader.js";
 import { GUI } from "three/addons/libs/lil-gui.module.min.js";
+import Stats from "stats-gl";
+
+/**
+ * Base
+ */
+
+// Canvas
+const canvas = document.querySelector("canvas.webgl");
+
+// Scene
+const scene = new THREE.Scene();
+
+/**
+ * Sizes
+ */
+const sizes = {
+  width: window.innerWidth,
+  height: window.innerHeight,
+};
+
+window.addEventListener("resize", () => {
+  // Update sizes
+  sizes.width = window.innerWidth;
+  sizes.height = window.innerHeight;
+
+  // Update camera
+  camera.aspect = sizes.width / sizes.height;
+  camera.updateProjectionMatrix();
+
+  // Update renderer
+  renderer.setSize(sizes.width, sizes.height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+});
+/**
+ * Renderer
+ */
+const renderer = new THREE.WebGLRenderer({
+  canvas: canvas,
+});
+renderer.setSize(sizes.width, sizes.height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 // import cloudsVertexShader from "./shaders/clouds/vertex.glsl";
 // import cloudsFragmentShader from "./shaders/clouds/fragment.glsl";
@@ -15,6 +56,30 @@ import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 // import rainbowVertexShader from "./shaders/rainbow/vertex.glsl";
 // import rainbowFragmentShader from "./shaders/rainbow/fragment.glsl";
 
+/*
+ ** Stats
+ */
+// create a new Stats object
+const stats = new Stats({
+  logsPerSecond: 20,
+  samplesLog: 100,
+  samplesGraph: 10,
+  precision: 2,
+  horizontal: true,
+  minimal: false,
+  mode: 0,
+});
+
+// append the stats container to the body of the document
+document.body.appendChild(stats.container);
+
+scene.onBeforeRender = function () {
+  stats.begin();
+};
+
+scene.onAfterRender = function () {
+  stats.end();
+};
 /**
  * Textures
  */
@@ -123,38 +188,6 @@ function initSky() {
 }
 
 /**
- * Base
- */
-
-// Canvas
-const canvas = document.querySelector("canvas.webgl");
-
-// Scene
-const scene = new THREE.Scene();
-
-/**
- * Sizes
- */
-const sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight,
-};
-
-window.addEventListener("resize", () => {
-  // Update sizes
-  sizes.width = window.innerWidth;
-  sizes.height = window.innerHeight;
-
-  // Update camera
-  camera.aspect = sizes.width / sizes.height;
-  camera.updateProjectionMatrix();
-
-  // Update renderer
-  renderer.setSize(sizes.width, sizes.height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-});
-
-/**
  * Camera
  */
 // Base camera
@@ -174,15 +207,6 @@ controls.enableDamping = true;
 // Helper
 const helper = new THREE.GridHelper(10000, 2, 0xffffff, 0xffffff);
 scene.add(helper);
-
-/**
- * Renderer
- */
-const renderer = new THREE.WebGLRenderer({
-  canvas: canvas,
-});
-renderer.setSize(sizes.width, sizes.height);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 initSky();
 
