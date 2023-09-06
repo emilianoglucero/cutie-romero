@@ -8,12 +8,14 @@ import { TTFLoader } from "three/examples/jsm/loaders/TTFLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 import { Font } from "three/examples/jsm/loaders/FontLoader.js";
 import { GUI } from "three/addons/libs/lil-gui.module.min.js";
+import { FBXLoader } from "three/addons/loaders/FBXLoader.js";
 import Stats from "stats-gl";
 
 /**
  * Base
  */
-
+const gui = new GUI();
+let mixer;
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
 
@@ -40,6 +42,8 @@ window.addEventListener("resize", () => {
   // Update renderer
   renderer.setSize(sizes.width, sizes.height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  renderer.shadowMap.enabled = true;
 });
 /**
  * Renderer
@@ -120,11 +124,75 @@ fontLoader.load("/fonts/Playball-Regular.ttf", (fontData) => {
 });
 
 /*
+ ** Cuti Model
+ */
+// model
+const loader = new FBXLoader();
+// loader.load("models/fbx/cutiDancingTwerk.fbx", function (object) {
+loader.load("models/fbx/cutiDancingTwerk.fbx", function (object) {
+  mixer = new THREE.AnimationMixer(object);
+  console.log(object);
+
+  const action = mixer.clipAction(object.animations[0]);
+  action.play();
+
+  object.traverse(function (child) {
+    if (child.isMesh) {
+      child.castShadow = true;
+      child.receiveShadow = true;
+    }
+  });
+
+  //scale object
+  object.scale.set(0.005, 0.005, 0.005);
+  //position object
+  object.position.set(2.37, -0.18, -0.43);
+
+  scene.add(object);
+
+  //gui for cuti model
+  const cutiFolder = gui.addFolder("Cuti Model");
+  cutiFolder.add(object.position, "x", -10, 10, 0.01).name("cuti x");
+  cutiFolder.add(object.position, "y", -10, 10, 0.01).name("cuti y");
+  cutiFolder.add(object.position, "z", -10, 10, 0.01).name("cuti z");
+  cutiFolder.add(object.rotation, "x", -10, 10, 0.01).name("cuti rx");
+  cutiFolder.add(object.rotation, "y", -10, 10, 0.01).name("cuti ry");
+  cutiFolder.add(object.rotation, "z", -10, 10, 0.01).name("cuti rz");
+});
+
+const dirLight = new THREE.DirectionalLight(0xffffff, 5);
+dirLight.position.set(0, 200, 100);
+dirLight.castShadow = true;
+dirLight.shadow.camera.top = 180;
+dirLight.shadow.camera.bottom = -100;
+dirLight.shadow.camera.left = -120;
+dirLight.shadow.camera.right = 120;
+scene.add(dirLight);
+//helper for dir light
+const dirLightHelper = new THREE.DirectionalLightHelper(dirLight, 10);
+scene.add(dirLightHelper);
+// gui for dir light
+const dirLightFolder = gui.addFolder("Dir Light");
+dirLightFolder.add(dirLight.position, "x", -10, 10, 0.01).name("dl x");
+dirLightFolder.add(dirLight.position, "y", -10, 10, 0.01).name("dl y");
+dirLightFolder.add(dirLight.position, "z", -10, 10, 0.01).name("dl z");
+
+const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 5);
+hemiLight.position.set(0, 200, 0);
+scene.add(hemiLight);
+//helper for hemi light
+const hemiLightHelper = new THREE.HemisphereLightHelper(hemiLight, 10);
+scene.add(hemiLightHelper);
+// gui for hemi light
+const hemiLightFolder = gui.addFolder("Hemi Light");
+hemiLightFolder.add(hemiLight.position, "x", -200, 200, 0.01).name("hl x");
+hemiLightFolder.add(hemiLight.position, "y", -200, 200, 0.01).name("hl y");
+hemiLightFolder.add(hemiLight.position, "z", -200, 200, 0.01).name("hl z");
+
+/*
  * Sky
  */
 let sky, sun;
-
-const gui = new GUI();
 
 function initSky() {
   // Add Sky
@@ -509,19 +577,17 @@ function initButterflies() {
     shuffle: shuffle,
   };
 
-  // animate();
-
   bodyTexture = new THREE.TextureLoader().load(
-    "https://www.iutbayonne.univ-pau.fr/~klevron/nabpi/three/b1.png"
+    "textures/butterfly/bodyTexture.png"
   );
   wingTexture1 = new THREE.TextureLoader().load(
-    "https://www.iutbayonne.univ-pau.fr/~klevron/nabpi/three/b1w.png"
+    "textures/butterfly/wingTexture1.png"
   );
   wingTexture2 = new THREE.TextureLoader().load(
-    "https://www.iutbayonne.univ-pau.fr/~klevron/nabpi/three/b2w.png"
+    "textures/butterfly/wingTexture2.png"
   );
   wingTexture3 = new THREE.TextureLoader().load(
-    "https://www.iutbayonne.univ-pau.fr/~klevron/nabpi/three/b3w.png"
+    "textures/butterfly/wingTexture3.png"
   );
 
   butterflies = [];
@@ -981,8 +1047,12 @@ cutiImagePlane();
  */
 const clock = new THREE.Clock();
 
-const tick = () => {
-  const elapsedTime = clock.getElapsedTime();
+function animate() {
+  requestAnimationFrame(animate);
+
+  const delta = clock.getDelta();
+
+  if (mixer) mixer.update(delta);
 
   //Animate butterflies
   TWEEN.update();
@@ -1013,11 +1083,7 @@ const tick = () => {
 
   cloud4.material.uniforms.frame.value++;
 
-  // Render
   renderer.render(scene, camera);
+}
 
-  // Call tick again on the next frame
-  window.requestAnimationFrame(tick);
-};
-
-tick();
+animate();
