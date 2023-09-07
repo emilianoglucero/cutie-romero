@@ -10,6 +10,7 @@ import { Font } from "three/examples/jsm/loaders/FontLoader.js";
 import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 import { FBXLoader } from "three/addons/loaders/FBXLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import * as CANNON from "cannon";
 import Stats from "stats-gl";
 
 /**
@@ -584,6 +585,91 @@ cloudsFolder.add(parameters, "range", 0, 1, 0.01).onChange(update);
 cloudsFolder.add(parameters, "steps", 0, 200, 1).onChange(update);
 
 /**
+ * Create a Physics-based 3D Cloth Plane with Cannon.js
+ */
+
+const world = new CANNON.World({
+  gravity: new CANNON.Vec3(0, -1000, 0), // m/s²
+  // gravity: new CANNON.Vec3(0, -9.82, 0), // m/s²
+});
+
+const Nx = 15;
+const Ny = 15;
+const mass = 1;
+const clothSize = 1;
+const dist = clothSize / Nx;
+
+const shape = new CANNON.Particle();
+
+const particles = [];
+
+for (let i = 0; i < Nx + 1; i++) {
+  particles.push([]);
+  for (let j = 0; j < Ny + 1; j++) {
+    const particle = new CANNON.Body({
+      // mass: mass,
+      mass: j === Ny ? 0 : mass,
+      shape,
+      position: new CANNON.Vec3(
+        (i - Nx * 0.5) * dist,
+        (j - Ny * 0.5) * dist,
+        0
+      ),
+      velocity: new CANNON.Vec3(-0.9, 0, -0.08),
+    });
+    particles[i].push(particle);
+    world.addBody(particle);
+  }
+}
+
+function connect(i1, j1, i2, j2) {
+  world.addConstraint(
+    new CANNON.DistanceConstraint(particles[i1][j1], particles[i2][j2], dist)
+  );
+}
+
+for (let i = 0; i < Nx + 1; i++) {
+  for (let j = 0; j < Ny + 1; j++) {
+    if (i < Nx) connect(i, j, i + 1, j);
+    if (j < Ny) connect(i, j, i, j + 1);
+  }
+}
+
+const clothGeometry = new THREE.PlaneGeometry(1, 1, Nx, Ny);
+
+const clothMat = new THREE.MeshBasicMaterial({
+  side: THREE.DoubleSide,
+  // wireframe: true,
+  map: new THREE.TextureLoader().load(
+    "./textures/cuti-plane/title/cuti-title-1.jpeg"
+  ),
+});
+
+const clothMesh1 = new THREE.Mesh(clothGeometry, clothMat);
+const clothMesh2 = new THREE.Mesh(clothGeometry, clothMat);
+const clothMesh3 = new THREE.Mesh(clothGeometry, clothMat);
+
+clothMesh1.position.set(-2, 0, 0);
+clothMesh2.position.set(-3, 0, 0);
+clothMesh3.position.set(-4, 0, 0);
+scene.add(clothMesh1, clothMesh2, clothMesh3);
+
+function updateParticules() {
+  for (let i = 0; i < Nx + 1; i++) {
+    for (let j = 0; j < Ny + 1; j++) {
+      const index = j * (Nx + 1) + i;
+
+      const positionAttribute = clothGeometry.attributes.position;
+
+      const position = particles[i][Ny - j].position;
+
+      positionAttribute.setXYZ(index, position.x, position.y, position.z);
+
+      positionAttribute.needsUpdate = true;
+    }
+  }
+}
+/**
  * Butterflies
  */
 // Butterflies particles with textures from https://codepen.io/jaydan/pen/ompzvj
@@ -1066,6 +1152,174 @@ function cutiImagePlane() {
     .name("Group z position");
 
   scene.add(cutiImagePlaneGroup);
+
+  //Cuti Image plane for title
+  // const cutiImagePlaneTitle1 = new THREE.Mesh(
+  //   new THREE.PlaneGeometry(1, 1, 1, 1),
+  //   new THREE.MeshBasicMaterial({
+  //     map: textureLoader.load("/textures/cuti-plane/title/cuti-title-1.jpeg"),
+  //     side: THREE.DoubleSide,
+  //   })
+  // );
+  // cutiImagePlaneTitle1.scale.set(1.5, 1.5, 1.5);
+  // cutiImagePlaneTitle1.position.set(2.06, -1.47, -6);
+  // cutiImagePlaneTitle1.rotation.set(0, 0, 0);
+
+  // const cutiImagePlaneTitleFolder = gui.addFolder("Cuti Image Plane Title");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle1.position, "x", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle1 x position");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle1.position, "y", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle1 y position");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle1.position, "z", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle1 z position");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle1.scale, "x", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle1 x scale");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle1.scale, "y", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle1 y scale");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle1.scale, "z", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle1 z scale");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle1.rotation, "x", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle1 x rotation");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle1.rotation, "y", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle1 y rotation");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle1.rotation, "z", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle1 z rotation");
+
+  // const cutiImagePlaneTitle2 = new THREE.Mesh(
+  //   new THREE.PlaneGeometry(1, 1, 1, 1),
+  //   new THREE.MeshBasicMaterial({
+  //     map: textureLoader.load("/textures/cuti-plane/title/cuti-title-2.jpeg"),
+  //     side: THREE.DoubleSide,
+  //   })
+  // );
+  // cutiImagePlaneTitle2.scale.set(3.4, 1.5, 1.5);
+  // cutiImagePlaneTitle2.position.set(0, 1.2, -6.3);
+  // cutiImagePlaneTitle2.rotation.set(0, 0, 0);
+
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle2.position, "x", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle2 x position");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle2.position, "y", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle2 y position");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle2.position, "z", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle2 z position");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle2.scale, "x", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle2 x scale");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle2.scale, "y", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle2 y scale");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle2.scale, "z", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle2 z scale");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle2.rotation, "x", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle2 x rotation");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle2.rotation, "y", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle2 y rotation");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle2.rotation, "z", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle2 z rotation");
+
+  // const cutiImagePlaneTitle3 = new THREE.Mesh(
+  //   new THREE.PlaneGeometry(1, 1, 1, 1),
+  //   new THREE.MeshBasicMaterial({
+  //     map: textureLoader.load("/textures/cuti-plane/title/cuti-title-3.jpeg"),
+  //     side: THREE.DoubleSide,
+  //   })
+  // );
+  // cutiImagePlaneTitle3.scale.set(1.5, -2.62, 1.5);
+  // cutiImagePlaneTitle3.position.set(-2.62, -0.23, -5.3);
+  // cutiImagePlaneTitle3.rotation.set(3, 0, 0);
+
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle3.position, "x", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle3 x position");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle3.position, "y", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle3 y position");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle3.position, "z", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle3 z position");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle3.scale, "x", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle3 x scale");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle3.scale, "y", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle3 y scale");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle3.scale, "z", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle3 z scale");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle3.rotation, "x", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle3 x rotation");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle3.rotation, "y", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle3 y rotation");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle3.rotation, "z", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle3 z rotation");
+
+  // const cutiImagePlaneTitle4 = new THREE.Mesh(
+  //   new THREE.PlaneGeometry(1, 1, 1, 1),
+  //   new THREE.MeshBasicMaterial({
+  //     map: textureLoader.load("/textures/cuti-plane/title/cuti-title-4.jpeg"),
+  //     side: THREE.DoubleSide,
+  //   })
+  // );
+  // cutiImagePlaneTitle4.scale.set(-1.29, -1.6, 1.5);
+  // cutiImagePlaneTitle4.position.set(-0.21, -1.64, -5.3);
+  // cutiImagePlaneTitle4.rotation.set(3, 0, 0);
+
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle4.position, "x", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle4 x position");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle4.position, "y", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle4 y position");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle4.position, "z", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle4 z position");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle4.scale, "x", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle4 x scale");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle4.scale, "y", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle4 y scale");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle4.scale, "z", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle4 z scale");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle4.rotation, "x", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle4 x rotation");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle4.rotation, "y", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle4 y rotation");
+  // cutiImagePlaneTitleFolder
+  //   .add(cutiImagePlaneTitle4.rotation, "z", -10, 10, 0.01)
+  //   .name("cutiImagePlaneTitle4 z rotation");
+
+  // const cutiImagePlaneTitleGroup = new THREE.Group();
+  // cutiImagePlaneTitleGroup.add(
+  //   cutiImagePlaneTitle1,
+  //   cutiImagePlaneTitle2,
+  //   cutiImagePlaneTitle3,
+  //   cutiImagePlaneTitle4
+  // );
+  // cutiImagePlaneTitleGroup.position.set(0, 0, 4);
+  // scene.add(cutiImagePlaneTitleGroup);
 }
 cutiImagePlane();
 
@@ -1074,7 +1328,8 @@ cutiImagePlane();
  */
 const clock = new THREE.Clock();
 
-function animate() {
+const timeStep = 1 / 60;
+function animate(time) {
   requestAnimationFrame(animate);
 
   const delta = clock.getDelta();
@@ -1086,6 +1341,10 @@ function animate() {
   for (var i = 0; i < butterflies.length; i++) {
     butterflies[i].move();
   }
+
+  //cannon cloth simulation
+  updateParticules();
+  world.step(timeStep);
 
   // Update controls
   controls.update();
@@ -1112,5 +1371,5 @@ function animate() {
 
   renderer.render(scene, camera);
 }
-
+// renderer.setAnimationLoop(animate);
 animate();
