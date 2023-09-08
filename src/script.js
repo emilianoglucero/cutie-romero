@@ -11,7 +11,10 @@ import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 import { FBXLoader } from "three/addons/loaders/FBXLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import * as CANNON from "cannon";
+import gsap from "gsap";
 import Stats from "stats-gl";
+
+import { FirstPersonControls } from "three/examples/jsm/controls/FirstPersonControls.js";
 
 /**
  * Base
@@ -62,6 +65,22 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 // import rainbowVertexShader from "./shaders/rainbow/vertex.glsl";
 // import rainbowFragmentShader from "./shaders/rainbow/fragment.glsl";
 
+// renderer.setClearColor(0xa3a3a3);
+//first person control camera
+// const controls = new FirstPersonControls(camera, renderer.domElement);
+// controls.movementSpeed = 8;
+// controls.lookSpeed = 0.08;
+// controls.lookVertical = true
+const camera = new THREE.PerspectiveCamera(
+  45,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+
+camera.position.set(0.81, 0.22, 3.95);
+camera.lookAt(0.81, 0.22, 3.95);
+
 /*
  ** Stats
  */
@@ -96,9 +115,7 @@ const textureLoader = new THREE.TextureLoader();
  */
 const fontLoader = new TTFLoader();
 const matcapTexture = textureLoader.load("/textures/matcaps/1.png");
-console.log(matcapTexture);
 fontLoader.load("/fonts/Playball-Regular.ttf", (fontData) => {
-  console.log(fontData);
   // Convert the parsed fontData to the format Three.js understands
   const font = new Font(fontData);
 
@@ -130,7 +147,6 @@ fontLoader.load("/fonts/Playball-Regular.ttf", (fontData) => {
  */
 const gltfLoader = new GLTFLoader();
 gltfLoader.load("models/gltf/stylized_heart_model/scene.gltf", (gltf) => {
-  console.log(gltf);
   const title = gltf.scene.children[0];
   title.scale.set(1, 1, 1);
   title.position.set(0.08, 0.33, -0.43);
@@ -159,7 +175,6 @@ const loader = new FBXLoader();
 // loader.load("models/fbx/cutiDancingTwerk.fbx", function (object) {
 loader.load("models/fbx/cutiDancingTwerk.fbx", function (object) {
   mixer = new THREE.AnimationMixer(object);
-  console.log(object);
 
   const action = mixer.clipAction(object.animations[0]);
   action.play();
@@ -188,7 +203,7 @@ loader.load("models/fbx/cutiDancingTwerk.fbx", function (object) {
   cutiFolder.add(object.rotation, "z", -10, 10, 0.01).name("cuti rz");
 });
 
-const dirLight = new THREE.DirectionalLight(0xffffff, 5);
+const dirLight = new THREE.DirectionalLight("#f7d777", 5);
 dirLight.position.set(0, 200, 100);
 dirLight.castShadow = true;
 dirLight.shadow.camera.top = 180;
@@ -287,18 +302,18 @@ function initSky() {
  * Camera
  */
 // Base camera
-const camera = new THREE.PerspectiveCamera(
-  75,
-  sizes.width / sizes.height,
-  0.1,
-  100
-);
-camera.position.set(0.25, -0.25, 1);
-scene.add(camera);
+// const camera = new THREE.PerspectiveCamera(
+//   75,
+//   sizes.width / sizes.height,
+//   0.1,
+//   100
+// );
+// camera.position.set(0.25, -0.25, 1);
+// scene.add(camera);
 
 // Controls
-const controls = new OrbitControls(camera, canvas);
-controls.enableDamping = true;
+// const controls = new OrbitControls(camera, canvas);
+// controls.enableDamping = true;
 
 // Helper
 const helper = new THREE.GridHelper(10000, 2, 0xffffff, 0xffffff);
@@ -592,7 +607,6 @@ const world = new CANNON.World({
   gravity: new CANNON.Vec3(0, -1000, 0), // m/s²
   // gravity: new CANNON.Vec3(0, -9.82, 0), // m/s²
 });
-
 const Nx = 15;
 const Ny = 15;
 const mass = 1;
@@ -1323,6 +1337,55 @@ function cutiImagePlane() {
 }
 cutiImagePlane();
 
+const moveCamara = (x, y, z) => {
+  gsap.to(camera.position, {
+    duration: 3,
+    x,
+    y,
+    z,
+    ease: "power2.inOut",
+  });
+};
+
+const rotateCamera = (x, y, z) => {
+  gsap.to(camera.rotation, {
+    duration: 3,
+    x,
+    y,
+    z,
+    ease: "power2.inOut",
+  });
+};
+
+let position = 0;
+window.addEventListener("mouseup", () => {
+  console.log(camera.position);
+  switch (position) {
+    case 0:
+      moveCamara(0.81, 0.22, 3.95);
+      rotateCamera(0, 0.1, 0);
+      position = 1;
+      break;
+    case 1:
+      moveCamara(6.81, 0.22, 6.95);
+      rotateCamera(0, 0.1, 0);
+      position = 2;
+      break;
+    case 2:
+      moveCamara(9.81, 0.22, 9.95);
+      rotateCamera(0, 0.1, 0);
+      position = 3;
+      break;
+    case 3:
+      moveCamara(9.81, 1.22, 9.95);
+      rotateCamera(0, 0.1, 0);
+      position = 4;
+      break;
+    default:
+      break;
+  }
+});
+
 /**
  * Animate
  */
@@ -1347,7 +1410,8 @@ function animate(time) {
   world.step(timeStep);
 
   // Update controls
-  controls.update();
+  // controls.update(delta);
+  // controls.update();
   //Animate clouds
   cloud1.material.uniforms.cameraPos.value.copy(camera.position);
   cloud1.rotation.y = -performance.now() / 7500;
