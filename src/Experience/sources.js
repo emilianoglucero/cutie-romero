@@ -44,4 +44,9 @@ export default [
     type: "fbx",
     path: ["models/fbx/cutiDancingTwerk.fbx"],
   },
+  {
+    name: "3DTitle",
+    type: "3DText",
+    path: ["textures/matcaps/1.png"],
+  },
 ];

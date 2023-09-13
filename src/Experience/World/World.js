@@ -1,9 +1,11 @@
 import * as THREE from "three";
-import Environment from "./Environment";
-import CutiImagePlane from "./CutiPlaneImages";
-import CutiDancingModel from "./CutDancingModel";
-import SceneSky from "./SceneSky";
-import Clouds from "./Clouds";
+import Environment from "./Environment.js";
+import CutiImagePlane from "./CutiPlaneImages.js";
+import CutiDancingModel from "./CutDancingModel.js";
+import SceneSky from "./SceneSky.js";
+import Clouds from "./Clouds.js";
+import Rainbow from "./Rainbow.js";
+import Title3D from "./Title3D.js";
 export default class World {
   constructor(experience) {
     this.experience = experience;
@@ -20,6 +22,8 @@ export default class World {
       this.cutiDancingModel = new CutiDancingModel(this);
       this.sky = new SceneSky(this);
       this.clouds = new Clouds(this);
+      this.rainbow = new Rainbow(this);
+      this.Title3D = new Title3D(this);
     });
   }
 

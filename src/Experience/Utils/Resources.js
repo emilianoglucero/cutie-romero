@@ -3,6 +3,7 @@ import { TextureLoader } from "three";
 import { FBXLoader } from "three/addons/loaders/FBXLoader.js";
 
 import EventEmitter from "./EventEmitter";
+import { TTFLoader } from "three/examples/jsm/loaders/TTFLoader";
 
 export default class Resources extends EventEmitter {
   constructor(sources) {
@@ -23,6 +24,7 @@ export default class Resources extends EventEmitter {
     this.loaders = {};
     this.loaders.textureLoader = new TextureLoader();
     this.loaders.FBXLoader = new FBXLoader();
+    this.loaders.TTFLoader = new TTFLoader();
   }
 
   startLoading() {
@@ -34,6 +36,10 @@ export default class Resources extends EventEmitter {
         });
       } else if (source.type === "fbx") {
         this.loaders.FBXLoader.load(source.path, (file) => {
+          this.sourceLoaded(source, file);
+        });
+      } else if (source.type === "3DText") {
+        this.loaders.textureLoader.load(source.path, (file) => {
           this.sourceLoaded(source, file);
         });
       }
