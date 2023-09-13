@@ -6,7 +6,6 @@ export default class Title3D {
     this.experience = experience;
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
-    console.log(this.resources);
 
     this.setTitle3D();
   }
