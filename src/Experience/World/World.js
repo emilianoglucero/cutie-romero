@@ -7,6 +7,8 @@ import Clouds from "./Clouds.js";
 import Rainbow from "./Rainbow.js";
 import Title3D from "./Title3D.js";
 import Butterflies from "./Butterflies.js";
+import Stats from "stats-gl";
+import ExperienceStats from "../Utils/ExperienceStats.js";
 export default class World {
   constructor(experience) {
     this.experience = experience;
@@ -26,6 +28,7 @@ export default class World {
       this.rainbow = new Rainbow(this);
       this.title3D = new Title3D(this);
       this.butterflies = new Butterflies(this);
+      this.stats = new ExperienceStats(this);
     });
   }
 
