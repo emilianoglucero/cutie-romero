@@ -1,6 +1,6 @@
 export default [
   {
-    name: "cutiImagePlaneTexture",
+    name: "cutiImagePlaneTexture1",
     type: "planeTexture",
     path: ["textures/cuti-plane/cuti-1.webp"],
   },
