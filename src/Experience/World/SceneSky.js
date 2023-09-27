@@ -12,7 +12,7 @@ export default class SceneSky {
 
   setSceneSky() {
     this.helper = new THREE.GridHelper(10000, 2, 0xffffff, 0xffffff);
-    this.scene.add(this.helper);
+    // this.scene.add(this.helper);
     this.sky = new Sky();
     this.sky.scale.setScalar(450000);
     this.scene.add(this.sky);

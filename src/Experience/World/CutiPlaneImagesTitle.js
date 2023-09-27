@@ -59,7 +59,7 @@ export default class CutiPlaneImagesTitle {
 
     this.flower2 = new THREE.Mesh(this.geometry, this.cutiMaterial3);
     this.flower2.position.set(-0.69, -0.94, 0);
-    this.flower2.rotation.set(0, 3, -0.18);
+    this.flower2.rotation.set(0, 3, -0.4);
     this.flower2.scale.set(1, 1, 1);
 
     // add to a group

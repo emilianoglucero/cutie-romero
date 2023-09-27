@@ -26,7 +26,6 @@ export default class Experience {
     this.camera = new Camera(this);
     this.renderer = new Renderer(this);
     this.world = new World(this);
-    this.environment = new Environment(this);
 
     //Sizes resize Events
     this.sizes.on("resize", () => {

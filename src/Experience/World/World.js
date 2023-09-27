@@ -1,4 +1,3 @@
-import * as THREE from "three";
 import Environment from "./Environment.js";
 import CutiPlaneImages from "./CutiPlaneImages.js";
 import CutiDancingModel from "./CutDancingModel.js";
@@ -22,9 +21,9 @@ export default class World {
       console.log("resources ready");
 
       //Setup
+      this.cutiDancingModel = new CutiDancingModel(this);
       this.environment = new Environment(this);
       this.cutiPlaneImages = new CutiPlaneImages(this);
-      this.cutiDancingModel = new CutiDancingModel(this);
       this.sky = new SceneSky(this);
       this.clouds = new Clouds(this);
       this.rainbow = new Rainbow(this);

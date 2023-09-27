@@ -12,14 +12,12 @@ export default class CutiDancingModel {
 
     this.setModel();
     this.setAnimation();
-    this.setFloor();
   }
 
   setModel() {
     this.model = this.resource;
     this.model.scale.set(0.006, 0.006, 0.006);
     this.model.position.set(2.78, 0, 0);
-    this.model.rotation.set(0, 0, 0);
     this.scene.add(this.model);
 
     // Debug
@@ -41,19 +39,6 @@ export default class CutiDancingModel {
     this.mixer = new THREE.AnimationMixer(this.model);
     this.action = this.mixer.clipAction(this.model.animations[0]);
     this.action.play();
-  }
-
-  setFloor() {
-    this.floor = new THREE.Mesh(
-      new THREE.CircleGeometry(0.8, 32),
-      new THREE.MeshBasicMaterial({
-        color: 0xbcd7df,
-        // side: THREE.DoubleSide,
-      })
-    );
-    this.floor.rotation.x = -Math.PI * 0.5;
-    this.floor.position.set(2.78, -0.001, 0);
-    this.scene.add(this.floor);
   }
 
   update() {
