@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import Environment from "./Environment.js";
-import CutiImagePlane from "./CutiPlaneImages.js";
+import CutiPlaneImages from "./CutiPlaneImages.js";
 import CutiDancingModel from "./CutDancingModel.js";
 import SceneSky from "./SceneSky.js";
 import Clouds from "./Clouds.js";
@@ -10,6 +10,7 @@ import Butterflies from "./Butterflies.js";
 import Stats from "stats-gl";
 import ExperienceStats from "../Utils/ExperienceStats.js";
 import ClothPlane from "./ClothPlane.js";
+import CutiPlaneImagesTitle from "./CutiPlaneImagesTitle.js";
 export default class World {
   constructor(experience) {
     this.experience = experience;
@@ -22,7 +23,7 @@ export default class World {
 
       //Setup
       this.environment = new Environment(this);
-      this.cutiImagePlane = new CutiImagePlane(this);
+      this.cutiPlaneImages = new CutiPlaneImages(this);
       this.cutiDancingModel = new CutiDancingModel(this);
       this.sky = new SceneSky(this);
       this.clouds = new Clouds(this);
@@ -31,6 +32,7 @@ export default class World {
       this.butterflies = new Butterflies(this);
       this.stats = new ExperienceStats(this);
       this.clothPlane = new ClothPlane(this);
+      this.cutiPlaneImageTitle = new CutiPlaneImagesTitle(this);
     });
   }
 

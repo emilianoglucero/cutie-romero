@@ -212,13 +212,13 @@ export default class Clouds {
     });
 
     this.cloud1 = new THREE.Mesh(this.cloudGeometry, this.cloudMaterial);
-    this.cloud1.position.set(2, 0, -1);
+    this.cloud1.position.set(2, 0, 16);
     this.cloud2 = new THREE.Mesh(this.cloudGeometry, this.cloudMaterial);
-    this.cloud2.position.set(-2, 0, -1);
+    this.cloud2.position.set(-2, 0, 15);
     this.cloud3 = new THREE.Mesh(this.cloudGeometry, this.cloudMaterial);
-    this.cloud3.position.set(0, 0, 3);
+    this.cloud3.position.set(0, 0, 13);
     this.cloud4 = new THREE.Mesh(this.cloudGeometry, this.cloudMaterial);
-    this.cloud4.position.set(0, 0, -3);
+    this.cloud4.position.set(0, 0, 19);
     this.scene.add(this.cloud1, this.cloud2, this.cloud3, this.cloud4);
   }
 

@@ -5,6 +5,7 @@ export default class ClothPlane {
     this.experience = experience;
     this.resources = this.experience.resources;
     this.scene = this.experience.scene;
+    this.debug = this.experience.experience.debug;
 
     this.particles = [];
     this.timeStep = 1 / 60;
@@ -56,8 +57,8 @@ export default class ClothPlane {
           dist
         )
       );
-      console.log(world);
-      console.log(typeof world);
+      // console.log(world);
+      // console.log(typeof world);
       //   this.world = world;
     }
 
@@ -85,7 +86,26 @@ export default class ClothPlane {
     clothMesh1.position.set(-2, 0, 0);
     clothMesh2.position.set(-3, 0, 0);
     clothMesh3.position.set(-4, 0, 0);
-    this.scene.add(clothMesh1, clothMesh2, clothMesh3);
+    // add to group
+    this.clothGroup = new THREE.Group();
+    this.clothGroup.add(clothMesh1, clothMesh2, clothMesh3);
+    this.clothGroup.position.set(-4, 1.7, -27);
+    this.scene.add(this.clothGroup);
+
+    // Debug
+    if (this.debug.active) {
+      this.debugFolder = this.debug.ui.addFolder("Cuti Cloth Images");
+
+      this.debugFolder
+        .add(this.clothGroup.position, "x", -100, 100, 0.01)
+        .name("Group x position");
+      this.debugFolder
+        .add(this.clothGroup.position, "y", -100, 100, 0.01)
+        .name("Group y position");
+      this.debugFolder
+        .add(this.clothGroup.position, "z", -100, 100, 0.01)
+        .name("Group z position");
+    }
 
     function updateParticules() {
       for (let i = 0; i < this.Nx + 1; i++) {

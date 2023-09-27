@@ -1,9 +1,10 @@
 import * as THREE from "three";
-export default class CutiImagePlane {
+export default class CutiPlaneImages {
   constructor(experience) {
     this.experience = experience;
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
+    this.debug = this.experience.experience.debug;
 
     // this.setCutiImagePlane();
     this.setGeometry();
@@ -123,7 +124,22 @@ export default class CutiImagePlane {
       this.cuti7,
       this.cuti8
     );
+    this.cutiGroup.position.set(11.5, 1.67, -18);
 
+    // Debug
+    if (this.debug.active) {
+      this.debugFolder = this.debug.ui.addFolder("Cuti Plane Images");
+
+      this.debugFolder
+        .add(this.cutiGroup.position, "x", -100, 100, 0.01)
+        .name("Group x position");
+      this.debugFolder
+        .add(this.cutiGroup.position, "y", -100, 100, 0.01)
+        .name("Group y position");
+      this.debugFolder
+        .add(this.cutiGroup.position, "z", -100, 100, 0.01)
+        .name("Group z position");
+    }
     this.scene.add(this.cutiGroup);
   }
 }

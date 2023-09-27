@@ -49,4 +49,19 @@ export default [
     type: "3DText",
     path: ["textures/matcaps/1.png"],
   },
+  {
+    name: "cutiPlaneImageTitle1",
+    type: "planeTexture",
+    path: ["textures/title/cuti-furro.jpg"],
+  },
+  {
+    name: "flower1",
+    type: "planeTexture",
+    path: ["textures/flowers/blue-flower.png"],
+  },
+  {
+    name: "flower2",
+    type: "planeTexture",
+    path: ["textures/flowers/rose-flower.png"],
+  },
 ];
