@@ -13,23 +13,36 @@ export default class CutiPlaneImagesTitle {
   }
 
   setGeometry() {
-    this.geometry = new THREE.PlaneGeometry(1, 1, 1, 1);
+    this.geometry1 = new THREE.PlaneGeometry(1, 1, 1, 1);
+    this.geometry2 = new THREE.PlaneGeometry(2, 2, 100, 100);
   }
 
   setTextures() {
     this.textures = {};
-    this.textures.cutiPlaneImageTitle1 =
-      this.resources.items.cutiPlaneImageTitle1;
 
     this.textures.cutiPlaneImageTitle2 = this.resources.items.flower1;
 
     this.textures.cutiPlaneImageTitle3 = this.resources.items.flower2;
+
+    this.textures.cutiPlaneImageTitle1 =
+      this.resources.items.cutiPlaneImageTitle1;
+
+    this.textures.displacementTexture =
+      this.resources.items.displacementTexture;
+
+    this.textures.normalTexture = this.resources.items.normalTexture;
   }
 
   setMaterial() {
-    this.cutiMaterial1 = new THREE.MeshBasicMaterial({
+    this.cutiMaterial1 = new THREE.MeshPhongMaterial({
+      transparent: true,
+      normalMap: this.textures.normalTexture,
+      displacementMap: this.textures.displacementTexture,
       map: this.textures.cutiPlaneImageTitle1,
+      displacementScale: 0.5,
+      displacementBias: 0.5,
       side: THREE.DoubleSide,
+      wireframe: true,
     });
 
     this.cutiMaterial2 = new THREE.MeshBasicMaterial({
@@ -48,17 +61,18 @@ export default class CutiPlaneImagesTitle {
   }
 
   setMesh() {
-    this.mesh1 = new THREE.Mesh(this.geometry, this.cutiMaterial1);
-    this.mesh1.position.set(-4, 0.66, 0);
-    this.mesh1.scale.set(3, 3, 3);
+    this.mesh1 = new THREE.Mesh(this.geometry2, this.cutiMaterial1);
+    this.mesh1.position.set(-0.43, 0.66, 2.88);
+    this.mesh1.scale.set(1.35, 1.35, -7.3);
+    this.mesh1.rotation.set(0, 0.66, 0.1);
 
-    this.flower1 = new THREE.Mesh(this.geometry, this.cutiMaterial2);
+    this.flower1 = new THREE.Mesh(this.geometry1, this.cutiMaterial2);
     this.flower1.position.set(0.33, 1.1, 0);
     this.flower1.rotation.set(0, 0, 0.34);
     this.flower1.scale.set(1, 1, 1);
 
-    this.flower2 = new THREE.Mesh(this.geometry, this.cutiMaterial3);
-    this.flower2.position.set(-0.69, -0.94, 0);
+    this.flower2 = new THREE.Mesh(this.geometry1, this.cutiMaterial3);
+    this.flower2.position.set(0.59, -0.94, 0);
     this.flower2.rotation.set(0, 3, -0.4);
     this.flower2.scale.set(1, 1, 1);
 

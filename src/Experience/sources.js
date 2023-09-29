@@ -64,4 +64,14 @@ export default [
     type: "planeTexture",
     path: ["textures/flowers/rose-flower.png"],
   },
+  {
+    name: "displacementTexture",
+    type: "exr",
+    path: ["face/displacement.exr"],
+  },
+  {
+    name: "normalTexture",
+    type: "planeTexture",
+    path: ["face/normal.png"],
+  },
 ];
