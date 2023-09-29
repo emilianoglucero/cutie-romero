@@ -94,45 +94,265 @@ export default class CutiVideos {
   }
 
   setGeometry() {
-    this.videoGeometry = new THREE.PlaneGeometry(1, 1, 1, 1);
+    // this.videoGeometry = new THREE.PlaneGeometry(1, 1, 4, 8);
+    this.videoGeometry2 = new THREE.BoxGeometry(1, 1, 1, 1);
+    this.videoGeometry3 = new THREE.CylinderGeometry(5, 5, 20, 32);
   }
 
   setMesh() {
-    this.videoMesh1 = new THREE.Mesh(this.videoGeometry, this.videoMaterial1);
-    this.videoMesh1.position.set(-4, 0.66, 0);
-    this.videoMesh1.scale.set(3, 3, 3);
+    this.videoMesh1 = new THREE.Mesh(this.videoGeometry3, this.videoMaterial1);
+    this.videoMesh1.position.set(10, 6.4, 10);
+    this.videoMesh1.scale.set(1.8, 0.8, 1.5);
 
-    this.videoMesh2 = new THREE.Mesh(this.videoGeometry, this.videoMaterial2);
-    this.videoMesh2.position.set(0.33, 1.1, 0);
+    this.videoMesh2 = new THREE.Mesh(this.videoGeometry2, this.videoMaterial2);
+    this.videoMesh2.position.set(10.95, 8.41, 13.5);
     this.videoMesh2.rotation.set(0, 0, 0.34);
-    this.videoMesh2.scale.set(1, 1, 1);
+    this.videoMesh2.scale.set(2, 2, 2);
 
-    this.videoMesh3 = new THREE.Mesh(this.videoGeometry, this.videoMaterial3);
-    this.videoMesh3.position.set(-0.69, -0.94, 0);
+    this.videoMesh3 = new THREE.Mesh(this.videoGeometry2, this.videoMaterial3);
+    this.videoMesh3.position.set(12.2, 4.7, 10);
     this.videoMesh3.rotation.set(0, 3, -0.4);
-    this.videoMesh3.scale.set(1, 1, 1);
+    this.videoMesh3.scale.set(2, 2, 2);
 
-    this.videoMesh4 = new THREE.Mesh(this.videoGeometry, this.videoMaterial4);
-    this.videoMesh4.position.set(0.69, -0.94, 0);
+    this.videoMesh4 = new THREE.Mesh(this.videoGeometry2, this.videoMaterial4);
+    this.videoMesh4.position.set(11, 5, 4.1);
     this.videoMesh4.rotation.set(0, 3, -0.4);
-    this.videoMesh4.scale.set(1, 1, 1);
+    this.videoMesh4.scale.set(2, 2, 2);
 
-    this.videoMesh5 = new THREE.Mesh(this.videoGeometry, this.videoMaterial5);
-    this.videoMesh5.position.set(0, 0.66, 0);
-    this.videoMesh5.scale.set(3, 3, 3);
+    this.videoMesh5 = new THREE.Mesh(this.videoGeometry2, this.videoMaterial5);
+    this.videoMesh5.position.set(12, 5, 14);
+    this.videoMesh5.scale.set(2, 2, 2);
 
-    this.videoMesh6 = new THREE.Mesh(this.videoGeometry, this.videoMaterial6);
-    this.videoMesh6.position.set(0, 0.66, 0);
-    this.videoMesh6.scale.set(3, 3, 3);
+    this.videoMesh6 = new THREE.Mesh(this.videoGeometry2, this.videoMaterial6);
+    this.videoMesh6.position.set(13.3, 0, 5.3);
+    this.videoMesh6.scale.set(2, 2, 2);
 
-    // this.scene.add(
-    //   this.videoMesh1,
-    //   this.videoMesh2,
-    //   this.videoMesh3,
-    //   this.videoMesh4,
-    //   this.videoMesh5,
-    //   this.videoMesh6
-    // );
+    this.videoGroup = new THREE.Group();
+    this.videoGroup.add(
+      this.videoMesh1,
+      this.videoMesh2,
+      this.videoMesh3,
+      this.videoMesh4,
+      this.videoMesh5,
+      this.videoMesh6
+    );
+
+    this.scene.add(this.videoGroup);
+
+    // Debug
+    if (this.debug.active) {
+      this.debugFolder = this.debug.ui.addFolder("Cuti Videos");
+      this.debugFolder
+        .add(this.videoMesh1.position, "x", -100, 100, 0.1)
+        .name("Video 1 x position");
+      this.debugFolder
+        .add(this.videoMesh1.position, "y", -100, 100, 0.1)
+        .name("Video 1 y position");
+      this.debugFolder
+        .add(this.videoMesh1.position, "z", -100, 100, 0.1)
+        .name("Video 1 z position");
+
+      this.debugFolder
+        .add(this.videoMesh1.scale, "x", -100, 100, 0.1)
+        .name("Video 1 x scale");
+      this.debugFolder
+        .add(this.videoMesh1.scale, "y", -100, 100, 0.1)
+        .name("Video 1 y scale");
+      this.debugFolder
+        .add(this.videoMesh1.scale, "z", -100, 100, 0.1)
+        .name("Video 1 z scale");
+
+      this.debugFolder
+        .add(this.videoMesh1.rotation, "x", -Math.PI, Math.PI, 0.1)
+        .name("Video 1 x rotation");
+      this.debugFolder
+        .add(this.videoMesh1.rotation, "y", -Math.PI, Math.PI, 0.1)
+        .name("Video 1 y rotation");
+      this.debugFolder
+        .add(this.videoMesh1.rotation, "z", -Math.PI, Math.PI, 0.1)
+        .name("Video 1 z rotation");
+
+      this.debugFolder
+        .add(this.videoMesh2.position, "x", -100, 100, 0.1)
+        .name("Video 2 x position");
+      this.debugFolder
+        .add(this.videoMesh2.position, "y", -100, 100, 0.1)
+        .name("Video 2 y position");
+      this.debugFolder
+        .add(this.videoMesh2.position, "z", -100, 100, 0.1)
+        .name("Video 2 z position");
+
+      this.debugFolder
+        .add(this.videoMesh2.scale, "x", -100, 100, 0.1)
+        .name("Video 2 x scale");
+      this.debugFolder
+        .add(this.videoMesh2.scale, "y", -100, 100, 0.1)
+        .name("Video 2 y scale");
+      this.debugFolder
+        .add(this.videoMesh2.scale, "z", -100, 100, 0.1)
+        .name("Video 2 z scale");
+
+      this.debugFolder
+        .add(this.videoMesh2.rotation, "x", -Math.PI, Math.PI, 0.1)
+        .name("Video 2 x rotation");
+      this.debugFolder
+        .add(this.videoMesh2.rotation, "y", -Math.PI, Math.PI, 0.1)
+        .name("Video 2 y rotation");
+      this.debugFolder
+        .add(this.videoMesh2.rotation, "z", -Math.PI, Math.PI, 0.1)
+        .name("Video 2 z rotation");
+
+      this.debugFolder
+        .add(this.videoMesh3.position, "x", -100, 100, 0.1)
+        .name("Video 3 x position");
+      this.debugFolder
+        .add(this.videoMesh3.position, "y", -100, 100, 0.1)
+        .name("Video 3 y position");
+      this.debugFolder
+        .add(this.videoMesh3.position, "z", -100, 100, 0.1)
+        .name("Video 3 z position");
+
+      this.debugFolder
+        .add(this.videoMesh3.scale, "x", -100, 100, 0.1)
+        .name("Video 3 x scale");
+      this.debugFolder
+        .add(this.videoMesh3.scale, "y", -100, 100, 0.1)
+        .name("Video 3 y scale");
+      this.debugFolder
+        .add(this.videoMesh3.scale, "z", -100, 100, 0.1)
+        .name("Video 3 z scale");
+
+      this.debugFolder
+        .add(this.videoMesh3.rotation, "x", -Math.PI, Math.PI, 0.1)
+        .name("Video 3 x rotation");
+      this.debugFolder
+        .add(this.videoMesh3.rotation, "y", -Math.PI, Math.PI, 0.1)
+        .name("Video 3 y rotation");
+      this.debugFolder
+        .add(this.videoMesh3.rotation, "z", -Math.PI, Math.PI, 0.1)
+        .name("Video 3 z rotation");
+
+      this.debugFolder
+        .add(this.videoMesh4.position, "x", -100, 100, 0.1)
+        .name("Video 4 x position");
+      this.debugFolder
+        .add(this.videoMesh4.position, "y", -100, 100, 0.1)
+        .name("Video 4 y position");
+      this.debugFolder
+        .add(this.videoMesh4.position, "z", -100, 100, 0.1)
+        .name("Video 4 z position");
+
+      this.debugFolder
+        .add(this.videoMesh4.scale, "x", -100, 100, 0.1)
+        .name("Video 4 x scale");
+      this.debugFolder
+        .add(this.videoMesh4.scale, "y", -100, 100, 0.1)
+        .name("Video 4 y scale");
+      this.debugFolder
+        .add(this.videoMesh4.scale, "z", -100, 100, 0.1)
+        .name("Video 4 z scale");
+
+      this.debugFolder
+        .add(this.videoMesh4.rotation, "x", -Math.PI, Math.PI, 0.1)
+        .name("Video 4 x rotation");
+      this.debugFolder
+        .add(this.videoMesh4.rotation, "y", -Math.PI, Math.PI, 0.1)
+        .name("Video 4 y rotation");
+      this.debugFolder
+        .add(this.videoMesh4.rotation, "z", -Math.PI, Math.PI, 0.1)
+        .name("Video 4 z rotation");
+
+      this.debugFolder
+        .add(this.videoMesh5.position, "x", -100, 100, 0.1)
+        .name("Video 5 x position");
+      this.debugFolder
+        .add(this.videoMesh5.position, "y", -100, 100, 0.1)
+        .name("Video 5 y position");
+      this.debugFolder
+        .add(this.videoMesh5.position, "z", -100, 100, 0.1)
+        .name("Video 5 z position");
+      this.debugFolder
+
+        .add(this.videoMesh4.scale, "x", -100, 100, 0.1)
+        .name("Video 5 x scale");
+      this.debugFolder
+        .add(this.videoMesh5.scale, "y", -100, 100, 0.1)
+        .name("Video 5 y scale");
+      this.debugFolder
+        .add(this.videoMesh5.scale, "z", -100, 100, 0.1)
+        .name("Video 5 z scale");
+
+      this.debugFolder
+        .add(this.videoMesh5.rotation, "x", -Math.PI, Math.PI, 0.1)
+        .name("Video 5 x rotation");
+      this.debugFolder
+        .add(this.videoMesh5.rotation, "y", -Math.PI, Math.PI, 0.1)
+        .name("Video 5 y rotation");
+      this.debugFolder
+        .add(this.videoMesh5.rotation, "z", -Math.PI, Math.PI, 0.1)
+        .name("Video 5 z rotation");
+
+      this.debugFolder
+        .add(this.videoMesh6.position, "x", -100, 100, 0.1)
+        .name("Video 6 x position");
+      this.debugFolder
+        .add(this.videoMesh6.position, "y", -100, 100, 0.1)
+        .name("Video 6 y position");
+      this.debugFolder
+        .add(this.videoMesh6.position, "z", -100, 100, 0.1)
+        .name("Video 6 z position");
+
+      this.debugFolder
+        .add(this.videoMesh6.scale, "x", -100, 100, 0.1)
+        .name("Video 6 x scale");
+      this.debugFolder
+        .add(this.videoMesh6.scale, "y", -100, 100, 0.1)
+        .name("Video 6 y scale");
+      this.debugFolder
+        .add(this.videoMesh6.scale, "z", -100, 100, 0.1)
+        .name("Video 6 z scale");
+
+      this.debugFolder
+        .add(this.videoMesh6.rotation, "x", -Math.PI, Math.PI, 0.1)
+        .name("Video 6 x rotation");
+      this.debugFolder
+        .add(this.videoMesh6.rotation, "y", -Math.PI, Math.PI, 0.1)
+        .name("Video 6 y rotation");
+      this.debugFolder
+        .add(this.videoMesh6.rotation, "z", -Math.PI, Math.PI, 0.1)
+        .name("Video 6 z rotation");
+
+      this.debugFolder
+        //add videogroup
+        .add(this.videoGroup.position, "x", -300, 300, 1)
+        .name("Video Group x position");
+      this.debugFolder
+        .add(this.videoGroup.position, "y", -300, 300, 1)
+        .name("Video Group y position");
+      this.debugFolder
+        .add(this.videoGroup.position, "z", -300, 300, 1)
+        .name("Video Group z position");
+
+      this.debugFolder
+        .add(this.videoGroup.scale, "x", -100, 100, 0.1)
+        .name("Video Group x scale");
+      this.debugFolder
+        .add(this.videoGroup.scale, "y", -100, 100, 0.1)
+        .name("Video Group y scale");
+      this.debugFolder
+        .add(this.videoGroup.scale, "z", -100, 100, 0.1)
+        .name("Video Group z scale");
+
+      this.debugFolder
+        .add(this.videoGroup.rotation, "x", -Math.PI, Math.PI, 0.1)
+        .name("Video Group x rotation");
+      this.debugFolder
+        .add(this.videoGroup.rotation, "y", -Math.PI, Math.PI, 0.1)
+        .name("Video Group y rotation");
+      this.debugFolder
+        .add(this.videoGroup.rotation, "z", -Math.PI, Math.PI, 0.1)
+        .name("Video Group z rotation");
+    }
   }
 
   update() {
