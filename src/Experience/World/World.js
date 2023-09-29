@@ -10,6 +10,7 @@ import Stats from "stats-gl";
 import ExperienceStats from "../Utils/ExperienceStats.js";
 import ClothPlane from "./ClothPlane.js";
 import CutiPlaneImagesTitle from "./CutiPlaneImagesTitle.js";
+import CutiVideos from "./CutiVideos.js";
 export default class World {
   constructor(experience) {
     this.experience = experience;
@@ -32,6 +33,7 @@ export default class World {
       this.stats = new ExperienceStats(this);
       this.clothPlane = new ClothPlane(this);
       this.cutiPlaneImageTitle = new CutiPlaneImagesTitle(this);
+      this.cutiVideos = new CutiVideos(this);
     });
   }
 
@@ -47,6 +49,9 @@ export default class World {
     }
     if (this.clothPlane) {
       this.clothPlane.update();
+    }
+    if (this.cutiVideos) {
+      this.cutiVideos.update();
     }
   }
 }
