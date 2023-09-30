@@ -103,6 +103,7 @@ export default class CutiVideos {
     this.videoMesh1 = new THREE.Mesh(this.videoGeometry3, this.videoMaterial1);
     this.videoMesh1.position.set(10, 6.4, 10);
     this.videoMesh1.scale.set(1.8, 0.8, 1.5);
+    this.videoMesh1.rotation.set(0, 2.5, 0);
 
     this.videoMesh2 = new THREE.Mesh(this.videoGeometry2, this.videoMaterial2);
     this.videoMesh2.position.set(10.95, 8.41, 13.5);
@@ -136,6 +137,7 @@ export default class CutiVideos {
       this.videoMesh5,
       this.videoMesh6
     );
+    this.videoGroup.position.set(-9, 17, -43);
 
     this.scene.add(this.videoGroup);
 

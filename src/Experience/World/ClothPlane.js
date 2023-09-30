@@ -157,7 +157,7 @@ export default class ClothPlane {
       clothMesh7,
       clothMesh8
     );
-    this.clothGroup.position.set(-4, 1.7, -27);
+    this.clothGroup.position.set(-9.4, 1.7, -9.4);
     // this.clothGroup.position.set(4, 1.7, 1.67);
 
     this.scene.add(this.clothGroup);
