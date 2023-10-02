@@ -124,7 +124,7 @@ export default class CutiPlaneImages {
       this.cuti7,
       this.cuti8
     );
-    this.cutiGroup.position.set(11.5, 1.67, -18);
+    this.cutiGroup.position.set(10.95, 3.32, 13.5);
 
     // Debug
     if (this.debug.active) {
