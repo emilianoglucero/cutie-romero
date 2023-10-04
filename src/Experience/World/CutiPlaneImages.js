@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import gsap from "gsap";
 export default class CutiPlaneImages {
   constructor(experience) {
     this.experience = experience;
@@ -125,6 +126,13 @@ export default class CutiPlaneImages {
       this.cuti8
     );
     this.cutiGroup.position.set(10.95, 3.32, 13.5);
+
+    gsap.to(this.cutiGroup.rotation, {
+      duration: 12,
+      y: Math.PI * 2,
+      repeat: -1,
+      ease: "none",
+    });
 
     // Debug
     if (this.debug.active) {

@@ -1,8 +1,6 @@
 import * as THREE from "three";
 export default class Environment {
   constructor(experience) {
-    console.log(experience);
-
     this.experience = experience;
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
