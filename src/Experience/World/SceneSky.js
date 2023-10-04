@@ -6,13 +6,11 @@ export default class SceneSky {
     this.experience = experience;
     this.scene = this.experience.scene;
     this.renderer = this.experience.experience.renderer;
-    this.debug = this.experience.experience.debug;
+    // this.debug = this.experience.experience.debug;
     this.setSceneSky();
   }
 
   setSceneSky() {
-    this.helper = new THREE.GridHelper(10000, 2, 0xffffff, 0xffffff);
-    // this.scene.add(this.helper);
     this.sky = new Sky();
     this.sky.scale.setScalar(450000);
     this.scene.add(this.sky);
