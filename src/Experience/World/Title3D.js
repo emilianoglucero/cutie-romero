@@ -23,12 +23,12 @@ export default class Title3D {
         font: font,
         size: 0.5,
         height: 0.2,
-        curveSegments: 12,
+        curveSegments: 6,
         bevelEnabled: true,
         bevelThickness: 0.03,
         bevelSize: 0.02,
         bevelOffset: 0,
-        bevelSegments: 5,
+        bevelSegments: 3,
       });
 
       // Create a standard material with red color and 50% gloss
