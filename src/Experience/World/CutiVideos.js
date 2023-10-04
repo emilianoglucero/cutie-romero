@@ -34,97 +34,83 @@ export default class CutiVideos {
       this.resources.items.displacementTexture;
     this.textures.image1 = this.resources.items.cutiPlaneImageTitle1;
 
-    this.videoTexture1 = new THREE.VideoTexture(this.video1);
-    this.videoTexture1.minFilter = THREE.LinearFilter;
-    this.videoTexture1.magFilter = THREE.LinearFilter;
-    this.videoTexture1.crossOrigin = "anonymous";
-    this.videoTexture2 = new THREE.VideoTexture(this.video2);
-    this.videoTexture2.minFilter = THREE.LinearFilter;
-    this.videoTexture2.magFilter = THREE.LinearFilter;
-    this.videoTexture2.crossOrigin = "anonymous";
-    this.videoTexture3 = new THREE.VideoTexture(this.video3);
-    this.videoTexture3.minFilter = THREE.LinearFilter;
-    this.videoTexture3.magFilter = THREE.LinearFilter;
-    this.videoTexture3.crossOrigin = "anonymous";
-    this.videoTexture4 = new THREE.VideoTexture(this.video4);
+    this.videoTextures = [];
+    const videos = [
+      this.video1,
+      this.video2,
+      this.video3,
+      this.video4,
+      this.video5,
+      this.video6,
+    ];
 
-    this.videoTexture4.minFilter = THREE.LinearFilter;
-    this.videoTexture4.magFilter = THREE.LinearFilter;
-    this.videoTexture4.crossOrigin = "anonymous";
-    this.videoTexture5 = new THREE.VideoTexture(this.video5);
-    this.videoTexture5.minFilter = THREE.LinearFilter;
-    this.videoTexture5.magFilter = THREE.LinearFilter;
-    this.videoTexture5.crossOrigin = "anonymous";
-    this.videoTexture6 = new THREE.VideoTexture(this.video6);
-    this.videoTexture6.minFilter = THREE.LinearFilter;
-    this.videoTexture6.magFilter = THREE.LinearFilter;
-    this.videoTexture6.crossOrigin = "anonymous";
+    for (let i = 0; i < videos.length; i++) {
+      this.videoTextures[i] = new THREE.VideoTexture(videos[i]);
+      this.videoTextures[i].minFilter = THREE.LinearFilter;
+      this.videoTextures[i].magFilter = THREE.LinearFilter;
+      this.videoTextures[i].crossOrigin = "anonymous";
+    }
   }
 
   setMaterials() {
-    this.videoMaterial1 = new THREE.MeshBasicMaterial({
-      map: this.videoTexture1,
-      side: THREE.DoubleSide,
-    });
-
-    this.videoMaterial2 = new THREE.MeshBasicMaterial({
-      map: this.videoTexture2,
-      side: THREE.DoubleSide,
-    });
-
-    this.videoMaterial3 = new THREE.MeshBasicMaterial({
-      map: this.videoTexture3,
-      side: THREE.DoubleSide,
-    });
-
-    this.videoMaterial4 = new THREE.MeshBasicMaterial({
-      map: this.videoTexture4,
-      side: THREE.DoubleSide,
-    });
-
-    this.videoMaterial5 = new THREE.MeshBasicMaterial({
-      map: this.videoTexture5,
-      side: THREE.DoubleSide,
-    });
-
-    this.videoMaterial6 = new THREE.MeshBasicMaterial({
-      map: this.videoTexture6,
-      side: THREE.DoubleSide,
-    });
+    this.videoMaterials = [];
+    for (let i = 0; i < this.videoTextures.length; i++) {
+      this.videoMaterials[i] = new THREE.MeshBasicMaterial({
+        map: this.videoTextures[i],
+        side: i === 0 ? THREE.DoubleSide : THREE.FrontSide,
+      });
+    }
   }
 
   setGeometry() {
-    // this.videoGeometry = new THREE.PlaneGeometry(1, 1, 4, 8);
-    this.videoGeometry2 = new THREE.BoxGeometry(1, 1, 1, 1);
-    this.videoGeometry3 = new THREE.CylinderGeometry(5, 5, 20, 32);
+    this.videoBoxGeometry = new THREE.BoxGeometry(1, 1, 1, 1);
+    this.videoCylinderGeometry = new THREE.CylinderGeometry(5, 5, 20, 32);
   }
 
   setMesh() {
-    this.videoMesh1 = new THREE.Mesh(this.videoGeometry3, this.videoMaterial1);
+    this.videoMesh1 = new THREE.Mesh(
+      this.videoCylinderGeometry,
+      this.videoMaterials[0]
+    );
     this.videoMesh1.position.set(10, 6.4, 10);
     this.videoMesh1.scale.set(1.8, 0.8, 1.5);
     this.videoMesh1.rotation.set(0, 2.5, 0);
 
-    this.videoMesh2 = new THREE.Mesh(this.videoGeometry2, this.videoMaterial2);
+    this.videoMesh2 = new THREE.Mesh(
+      this.videoBoxGeometry,
+      this.videoMaterials[1]
+    );
     this.videoMesh2.position.set(10.95, 8.41, 13.5);
     this.videoMesh2.rotation.set(0, 0, 0.34);
     this.videoMesh2.scale.set(2, 2, 2);
 
-    this.videoMesh3 = new THREE.Mesh(this.videoGeometry2, this.videoMaterial3);
+    this.videoMesh3 = new THREE.Mesh(
+      this.videoBoxGeometry,
+      this.videoMaterials[2]
+    );
     this.videoMesh3.position.set(12.2, 4.7, 10);
     this.videoMesh3.rotation.set(0, 3, -0.4);
     this.videoMesh3.scale.set(2, 2, 2);
 
-    this.videoMesh4 = new THREE.Mesh(this.videoGeometry2, this.videoMaterial4);
+    this.videoMesh4 = new THREE.Mesh(
+      this.videoBoxGeometry,
+      this.videoMaterials[3]
+    );
     this.videoMesh4.position.set(4.5, 5.8, 9.6);
     this.videoMesh4.rotation.set(0, 3, -0.4);
     this.videoMesh4.scale.set(2, 2, 2);
 
-    this.videoMesh5 = new THREE.Mesh(this.videoGeometry2, this.videoMaterial5);
+    this.videoMesh5 = new THREE.Mesh(
+      this.videoBoxGeometry,
+      this.videoMaterials[4]
+    );
     this.videoMesh5.position.set(12.8, 2.6, 16.6);
     this.videoMesh5.scale.set(2, 2, 2);
 
-    this.videoMesh6 = new THREE.Mesh(this.videoGeometry2, this.videoMaterial6);
+    this.videoMesh6 = new THREE.Mesh(
+      this.videoBoxGeometry,
+      this.videoMaterials[5]
+    );
     this.videoMesh6.position.set(8.4, 3.3, 13.5);
     this.videoMesh6.scale.set(2, 2, 2);
 
@@ -358,11 +344,8 @@ export default class CutiVideos {
   }
 
   update() {
-    this.videoTexture1.needsUpdate = true;
-    this.videoTexture2.needsUpdate = true;
-    this.videoTexture3.needsUpdate = true;
-    this.videoTexture4.needsUpdate = true;
-    this.videoTexture5.needsUpdate = true;
-    this.videoTexture6.needsUpdate = true;
+    for (let i = 0; i < this.videoTextures.length; i++) {
+      this.videoTextures[i].needsUpdate = true;
+    }
   }
 }
