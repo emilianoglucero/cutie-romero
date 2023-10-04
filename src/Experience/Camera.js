@@ -23,9 +23,9 @@ export default class Camera {
       0.1,
       100
     );
-    this.instance.position.set(0, 1.4, 4.8);
+    this.instance.position.set(0, 4.8, 4.8);
     this.instance.rotation.set(0, 0, 0);
-    this.instance.lookAt(0, 1.4, 4.8);
+    this.instance.lookAt(0, 4.8, 4.8);
     this.scene.add(this.instance);
   }
   setOrbitControls() {
@@ -53,31 +53,29 @@ export default class Camera {
     // this.controls.lat = 120;
 
     let position = 0;
-    console.log(position);
 
     window.addEventListener("mouseup", () => {
       console.log(this.instance.position);
 
-      this.rotateCamera(0.11, 0.32, 0);
       switch (position) {
         case 0:
-          this.moveCamera(-0.3, 0.33, 6.44);
-          this.rotateCamera(0.07, -0.02, 0);
+          this.moveCamera(10.3, -0.3, 4.4);
+          this.rotateCamera(-0.48, -3.14, 0);
           position = 1;
           break;
         case 1:
-          this.moveCamera(10.3, -0.3, 4.4);
-          this.rotateCamera(-0.48, -3.14, 0);
+          this.moveCamera(-1.9, 28.8, 13.5);
+          this.rotateCamera(0.66, -3.14, 0);
           position = 2;
           break;
         case 2:
-          this.moveCamera(-1.9, 28.8, 13.5);
-          this.rotateCamera(0.66, -3.14, 0);
+          this.moveCamera(-15.1, 2.3, 16.2);
+          this.rotateCamera(0, -0.64, 0);
           position = 3;
           break;
         case 3:
-          this.moveCamera(-15.1, 2.3, 16.2);
-          this.rotateCamera(0, -0.64, 0);
+          this.moveCamera(-0.3, 0.33, 6.44);
+          this.rotateCamera(0.07, -0.02, 0);
           position = 0;
           break;
       }

@@ -8,6 +8,7 @@ import Environment from "./World/Environment.js";
 import Resources from "./Utils/Resources.js";
 import sources from "./sources.js";
 import Debug from "./Utils/Debug.js";
+import Intro from "./Intro.js";
 
 export default class Experience {
   constructor() {
@@ -22,9 +23,10 @@ export default class Experience {
     this.sizes = new Sizes();
     this.time = new Time();
     this.scene = new THREE.Scene();
-    this.resources = new Resources(sources);
+    this.resources = new Resources(sources, this);
     this.camera = new Camera(this);
     this.renderer = new Renderer(this);
+    this.intro = new Intro(this);
     this.world = new World(this);
 
     //Sizes resize Events

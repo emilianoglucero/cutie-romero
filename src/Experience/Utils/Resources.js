@@ -5,12 +5,16 @@ import { FBXLoader } from "three/addons/loaders/FBXLoader.js";
 import EventEmitter from "./EventEmitter";
 import { TTFLoader } from "three/examples/jsm/loaders/TTFLoader";
 import { EXRLoader } from "three/examples/jsm/loaders/EXRLoader";
+import gsap from "gsap";
 
 export default class Resources extends EventEmitter {
-  constructor(sources) {
+  constructor(sources, experience) {
     super();
+    this.experience = experience;
+
     //Options
     this.sources = sources;
+    this.scene = experience.scene;
 
     //Setup
     this.items = {};
@@ -54,6 +58,10 @@ export default class Resources extends EventEmitter {
   sourceLoaded(source, file) {
     this.items[source.name] = file;
     this.loaded++;
+
+    const progressRatio = this.loaded / this.toLoad;
+    const loadingBarElement = document.querySelector(".loading-bar");
+    loadingBarElement.style.transform = `scaleX(${progressRatio})`;
 
     if (this.loaded === this.toLoad) {
       this.trigger("ready");

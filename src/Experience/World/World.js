@@ -19,20 +19,19 @@ export default class World {
 
     // Wait for the resources to be ready
     this.resources.on("ready", () => {
-      console.log("resources ready");
-
       //Setup
-      this.cutiDancingModel = new CutiDancingModel(this);
-      this.environment = new Environment(this);
-      this.cutiPlaneImages = new CutiPlaneImages(this);
-      this.sky = new SceneSky(this);
-      this.clouds = new Clouds(this);
-      this.rainbow = new Rainbow(this);
+
       this.title3D = new Title3D(this);
+      this.environment = new Environment(this);
+      this.sky = new SceneSky(this);
+      this.cutiDancingModel = new CutiDancingModel(this);
+      this.cutiPlaneImageTitle = new CutiPlaneImagesTitle(this);
+      this.clouds = new Clouds(this);
       this.butterflies = new Butterflies(this);
+      this.cutiPlaneImages = new CutiPlaneImages(this);
+      this.rainbow = new Rainbow(this);
       this.stats = new ExperienceStats(this);
       this.clothPlane = new ClothPlane(this);
-      this.cutiPlaneImageTitle = new CutiPlaneImagesTitle(this);
       this.cutiVideos = new CutiVideos(this);
     });
   }
