@@ -15,6 +15,7 @@ export default class Intro {
     this.overlayGeometry = new THREE.PlaneGeometry(2, 2, 1, 1);
     this.overlayMaterial = new THREE.ShaderMaterial({
       transparent: true,
+      precision: "lowp",
       uniforms: {
         uAlpha: { value: 1 },
       },
@@ -48,7 +49,7 @@ export default class Intro {
           delay: 1,
         });
         timeline.to(this.experience.camera.instance.position, {
-          duration: 8.5,
+          duration: 7.5,
           x: -0.3,
           y: 0.33,
           z: 6.44,

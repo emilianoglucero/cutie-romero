@@ -7,6 +7,7 @@ export default class Clouds {
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
     this.setClouds();
+    //try to use BufferGeometryUtils.mergeBufferGeometries
   }
 
   setClouds() {
@@ -209,6 +210,7 @@ export default class Clouds {
       fragmentShader: this.cloudsFragmentShader,
       side: THREE.BackSide,
       transparent: true,
+      precision: "lowp",
     });
 
     this.cloud1 = new THREE.Mesh(this.cloudGeometry, this.cloudMaterial);

@@ -11,7 +11,7 @@ export default class Rainbow {
     // /**
     //  * Rainbow
     //  */
-
+    //dont forget to use BufferGeometryUtils.mergeBufferGeometries and InstancedMesh
     //Rainbow shgaders
     const rainbowVertexShader = /* glsl */ `
 varying vec2 vUV;
@@ -39,6 +39,7 @@ void main () {
       uniforms: {},
       side: THREE.DoubleSide,
       transparent: true,
+      precision: "lowp",
     });
     const rainbowGeometry = new THREE.TorusGeometry(60, 4, 40, 100);
     const rainbow = new THREE.Mesh(rainbowGeometry, rainbowMaterial);
