@@ -45,14 +45,9 @@ export default [
     path: ["models/fbx/cutiDancingTwerk.fbx"],
   },
   {
-    name: "3DTitle",
-    type: "3DText",
-    path: ["textures/matcaps/1.png"],
-  },
-  {
     name: "cutiPlaneImageTitle1",
     type: "planeTexture",
-    path: ["textures/title/cuti-furro.jpg"],
+    path: ["textures/title/cuti-kitty.jpg"],
   },
   {
     name: "flower1",
