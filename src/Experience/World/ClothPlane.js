@@ -20,10 +20,10 @@ export default class ClothPlane {
       gravity: new CANNON.Vec3(0, -1000, 0), // m/s²
       // gravity: new CANNON.Vec3(0, -9.82, 0), // m/s²
     });
-    this.Nx = 15;
-    this.Ny = 15;
+    this.Nx = 36;
+    this.Ny = 36;
     const mass = 1;
-    const clothSize = 1;
+    const clothSize = 1.9;
     const dist = clothSize / this.Nx;
 
     const shape = new CANNON.Particle();
@@ -42,7 +42,7 @@ export default class ClothPlane {
             (j - this.Ny * 0.5) * dist,
             0
           ),
-          velocity: new CANNON.Vec3(-0.9, 0, -0.08),
+          velocity: new CANNON.Vec3(1, 3, 1),
         });
         this.particles[i].push(particle);
         world.addBody(particle);
@@ -201,6 +201,9 @@ export default class ClothPlane {
         const index = j * (this.Nx + 1) + i;
 
         const positionAttribute = this.clothGeometry.attributes.position;
+
+        //make particle velocity increase over time
+        this.particles[i][j].velocity.z += 0.003;
 
         const position = this.particles[i][this.Ny - j].position;
 
