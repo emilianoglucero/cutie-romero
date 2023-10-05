@@ -15,7 +15,8 @@ export default class Intro {
     this.overlayGeometry = new THREE.PlaneGeometry(2, 2, 1, 1);
     this.overlayMaterial = new THREE.ShaderMaterial({
       transparent: true,
-      precision: "lowp",
+      //precision: "lowp" causes the shader to not work on some devices,
+      // precision: "lowp",
       uniforms: {
         uAlpha: { value: 1 },
       },
