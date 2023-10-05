@@ -75,21 +75,21 @@ export default class ClothPlane {
       side: THREE.DoubleSide,
       // wireframe: true,
       map: this.resources.loaders.textureLoader.load(
-        "./textures/cloth/cuti-cloth-1.jpeg"
+        "./textures/cloth/cuti-cloth-1.jpg"
       ),
     });
     const clothMat2 = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       // wireframe: true,
       map: this.resources.loaders.textureLoader.load(
-        "./textures/cloth/cuti-cloth-2.jpeg"
+        "./textures/cloth/cuti-cloth-2.jpg"
       ),
     });
     const clothMat3 = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       // wireframe: true,
       map: this.resources.loaders.textureLoader.load(
-        "./textures/cloth/cuti-cloth-3.jpeg"
+        "./textures/cloth/cuti-cloth-3.jpg"
       ),
     });
     const clothMat4 = new THREE.MeshBasicMaterial({
@@ -103,28 +103,28 @@ export default class ClothPlane {
       side: THREE.DoubleSide,
       // wireframe: true,
       map: this.resources.loaders.textureLoader.load(
-        "./textures/cloth/cuti-cloth-5.jpeg"
+        "./textures/cloth/cuti-cloth-5.jpg"
       ),
     });
     const clothMat6 = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       // wireframe: true,
       map: this.resources.loaders.textureLoader.load(
-        "./textures/cloth/cuti-cloth-6.jpeg"
+        "./textures/cloth/cuti-cloth-6.jpg"
       ),
     });
     const clothMat7 = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       // wireframe: true,
       map: this.resources.loaders.textureLoader.load(
-        "./textures/cloth/cuti-cloth-7.jpeg"
+        "./textures/cloth/cuti-cloth-7.jpg"
       ),
     });
     const clothMat8 = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       // wireframe: true,
       map: this.resources.loaders.textureLoader.load(
-        "./textures/cloth/cuti-cloth-8.jpeg"
+        "./textures/cloth/cuti-cloth-8.jpg"
       ),
     });
 

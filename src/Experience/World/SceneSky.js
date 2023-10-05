@@ -12,7 +12,7 @@ export default class SceneSky {
 
   setSceneSky() {
     this.sky = new Sky();
-    this.sky.scale.setScalar(450000);
+    this.sky.scale.setScalar(500);
     this.scene.add(this.sky);
     this.sun = new THREE.Vector3();
 

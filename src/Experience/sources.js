@@ -2,42 +2,47 @@ export default [
   {
     name: "cutiImagePlaneTexture1",
     type: "planeTexture",
-    path: ["textures/cuti-plane/cuti-1.webp"],
+    path: ["textures/cuti-plane/cuti-1.jpg"],
   },
   {
     name: "cutiImagePlaneTexture2",
     type: "planeTexture",
-    path: ["textures/cuti-plane/cuti-2.webp"],
+    path: ["textures/cuti-plane/cuti-2.jpg"],
   },
   {
     name: "cutiImagePlaneTexture3",
     type: "planeTexture",
-    path: ["textures/cuti-plane/cuti-3.webp"],
+    path: ["textures/cuti-plane/cuti-3.jpg"],
   },
   {
     name: "cutiImagePlaneTexture4",
     type: "planeTexture",
-    path: ["textures/cuti-plane/cuti-4.webp"],
+    path: ["textures/cuti-plane/cuti-4.jpg"],
   },
   {
     name: "cutiImagePlaneTexture5",
     type: "planeTexture",
-    path: ["textures/cuti-plane/cuti-5.webp"],
+    path: ["textures/cuti-plane/cuti-5.jpg"],
   },
   {
     name: "cutiImagePlaneTexture6",
     type: "planeTexture",
-    path: ["textures/cuti-plane/cuti-6.webp"],
+    path: ["textures/cuti-plane/cuti-6.jpg"],
   },
   {
     name: "cutiImagePlaneTexture7",
     type: "planeTexture",
-    path: ["textures/cuti-plane/cuti-7.webp"],
+    path: ["textures/cuti-plane/cuti-7.jpg"],
   },
   {
     name: "cutiImagePlaneTexture8",
     type: "planeTexture",
-    path: ["textures/cuti-plane/cuti-8.webp"],
+    path: ["textures/cuti-plane/cuti-8.jpg"],
+  },
+  {
+    name: "cutiImagePlaneTexture9",
+    type: "planeTexture",
+    path: ["textures/cuti-plane/cuti-9.jpg"],
   },
   {
     name: "cutiDancingModel",

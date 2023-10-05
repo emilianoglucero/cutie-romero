@@ -36,6 +36,8 @@ export default class CutiPlaneImages {
       this.resources.items.cutiImagePlaneTexture7;
     this.textures.cutiImagePlaneTexture8 =
       this.resources.items.cutiImagePlaneTexture8;
+    this.textures.cutiImagePlaneTexture9 =
+      this.resources.items.cutiImagePlaneTexture9;
   }
 
   setMaterial() {
@@ -69,6 +71,10 @@ export default class CutiPlaneImages {
     });
     this.cutiMaterial8 = new THREE.MeshBasicMaterial({
       map: this.textures.cutiImagePlaneTexture8,
+      side: THREE.DoubleSide,
+    });
+    this.cutiMaterial9 = new THREE.MeshBasicMaterial({
+      map: this.textures.cutiImagePlaneTexture9,
       side: THREE.DoubleSide,
     });
   }
@@ -114,6 +120,11 @@ export default class CutiPlaneImages {
     this.cuti8.position.set(-0.64, 1.98, -0.68);
     this.cuti8.rotation.set(0, 0.65, 0.66);
 
+    this.cuti9 = new THREE.Mesh(this.geometry, this.cutiMaterial9);
+    this.cuti9.scale.set(1.5, 1.5, 1.5);
+    this.cuti9.position.set(0.78, 1.35, -0.38);
+    this.cuti9.rotation.set(-0.36, -0.89, 0.68);
+
     this.cutiGroup = new THREE.Group();
     this.cutiGroup.add(
       this.cuti1,
@@ -123,7 +134,8 @@ export default class CutiPlaneImages {
       this.cuti5,
       this.cuti6,
       this.cuti7,
-      this.cuti8
+      this.cuti8,
+      this.cuti9
     );
     this.cutiGroup.position.set(10.95, 3.32, 13.5);
 
@@ -137,6 +149,30 @@ export default class CutiPlaneImages {
     // Debug
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder("Cuti Plane Images");
+
+      // this.debugFolder
+      //   .add(this.cuti9.position, "x", -100, 100, 0.01)
+      //   .name("cuti9 x position");
+
+      // this.debugFolder
+      //   .add(this.cuti9.position, "y", -100, 100, 0.01)
+      //   .name("cuti9 y position");
+
+      // this.debugFolder
+      //   .add(this.cuti9.position, "z", -100, 100, 0.01)
+      //   .name("cuti9 z position");
+
+      // this.debugFolder
+      //   .add(this.cuti9.rotation, "x", -100, 100, 0.01)
+      //   .name("cuti9 x rotation");
+
+      // this.debugFolder
+      //   .add(this.cuti9.rotation, "y", -100, 100, 0.01)
+      //   .name("cuti9 y rotation");
+
+      this.debugFolder
+        .add(this.cuti9.rotation, "z", -100, 100, 0.01)
+        .name("cuti9 z rotation");
 
       this.debugFolder
         .add(this.cutiGroup.position, "x", -100, 100, 0.01)
