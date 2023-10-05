@@ -50,11 +50,5 @@ export default class Experience {
     this.camera.update();
     this.world.update();
     this.renderer.update();
-
-    // //Render
-    // window.experience.renderer.render(
-    //   window.experience.scene,
-    //   window.experience.camera.instance
-    // );
   }
 }

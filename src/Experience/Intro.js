@@ -42,7 +42,6 @@ export default class Intro {
     this.resources.on("ready", () => {
       // Create a timeline to sequence animations
       var timeline = gsap.timeline();
-
       gsap.delayedCall(0.5, () => {
         timeline.to(this.overlayMaterial.uniforms.uAlpha, {
           duration: 3,
@@ -55,10 +54,19 @@ export default class Intro {
           y: 0.33,
           z: 6.44,
           ease: "back.out",
+          onComplete: () => {
+            this.destroy();
+          },
         });
         this.loadingBarElement.classList.add("ended");
         this.loadingBarElement.style.transform = "";
       });
     });
+  }
+
+  destroy() {
+    this.overlayGeometry.dispose();
+    this.overlayMaterial.dispose();
+    this.scene.remove(this.overlayMesh);
   }
 }
