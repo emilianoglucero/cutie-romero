@@ -6,6 +6,7 @@ export default class Title3D {
     this.experience = experience;
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
+    this.debug = this.experience.experience.debug;
 
     this.setTitle3D();
   }
@@ -39,8 +40,19 @@ export default class Title3D {
       // Geometries are attached to meshes so that they get rendered
       const textMesh = new THREE.Mesh(textGeometry, textMaterial);
       // Update positioning of the text
+      //set matrixAutoUpdate to false so we can update the matrix manually
+      textMesh.matrixAutoUpdate = false;
       textMesh.position.set(-2, 0, 0);
+      textMesh.updateMatrix();
       this.scene.add(textMesh);
+
+      // Debug
+      if (this.debug.active) {
+        this.debugFolder = this.debug.ui.addFolder("Title3D");
+        this.debugFolder
+          .add(textMesh.position, "x", -10, 10, 0.01)
+          .name("Title3D position x");
+      }
     });
   }
 }
