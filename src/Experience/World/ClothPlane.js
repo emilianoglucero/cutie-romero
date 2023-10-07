@@ -20,8 +20,8 @@ export default class ClothPlane {
       gravity: new CANNON.Vec3(0, -1000, 0), // m/s²
       // gravity: new CANNON.Vec3(0, -9.82, 0), // m/s²
     });
-    this.Nx = 36;
-    this.Ny = 36;
+    this.Nx = 30;
+    this.Ny = 30;
     const mass = 1;
     const clothSize = 1.9;
     const dist = clothSize / this.Nx;
@@ -71,91 +71,44 @@ export default class ClothPlane {
 
     this.clothGeometry = new THREE.PlaneGeometry(1, 1, this.Nx, this.Ny);
 
-    const clothMat1 = new THREE.MeshBasicMaterial({
-      side: THREE.DoubleSide,
-      // wireframe: true,
-      map: this.resources.loaders.textureLoader.load(
-        "./textures/cloth/cuti-cloth-1.jpg"
-      ),
-    });
-    const clothMat2 = new THREE.MeshBasicMaterial({
-      side: THREE.DoubleSide,
-      // wireframe: true,
-      map: this.resources.loaders.textureLoader.load(
-        "./textures/cloth/cuti-cloth-2.jpg"
-      ),
-    });
-    const clothMat3 = new THREE.MeshBasicMaterial({
-      side: THREE.DoubleSide,
-      // wireframe: true,
-      map: this.resources.loaders.textureLoader.load(
-        "./textures/cloth/cuti-cloth-3.jpg"
-      ),
-    });
-    const clothMat4 = new THREE.MeshBasicMaterial({
-      side: THREE.DoubleSide,
-      // wireframe: true,
-      map: this.resources.loaders.textureLoader.load(
-        "./textures/cloth/cuti-cloth-4.jpg"
-      ),
-    });
-    const clothMat5 = new THREE.MeshBasicMaterial({
-      side: THREE.DoubleSide,
-      // wireframe: true,
-      map: this.resources.loaders.textureLoader.load(
-        "./textures/cloth/cuti-cloth-5.jpg"
-      ),
-    });
-    const clothMat6 = new THREE.MeshBasicMaterial({
-      side: THREE.DoubleSide,
-      // wireframe: true,
-      map: this.resources.loaders.textureLoader.load(
-        "./textures/cloth/cuti-cloth-6.jpg"
-      ),
-    });
-    const clothMat7 = new THREE.MeshBasicMaterial({
-      side: THREE.DoubleSide,
-      // wireframe: true,
-      map: this.resources.loaders.textureLoader.load(
-        "./textures/cloth/cuti-cloth-7.jpg"
-      ),
-    });
-    const clothMat8 = new THREE.MeshBasicMaterial({
-      side: THREE.DoubleSide,
-      // wireframe: true,
-      map: this.resources.loaders.textureLoader.load(
-        "./textures/cloth/cuti-cloth-8.jpg"
-      ),
-    });
+    this.clothMaterials = [];
+    for (let i = 0; i < 8; i++) {
+      this.clothMaterials[i] = new THREE.MeshBasicMaterial({
+        side: THREE.DoubleSide,
+        // wireframe: true,
+        map: this.resources.loaders.textureLoader.load(
+          "./textures/cloth/cuti-cloth-" + i + ".jpg"
+        ),
+      });
+    }
 
-    const clothMesh1 = new THREE.Mesh(this.clothGeometry, clothMat1);
-    const clothMesh2 = new THREE.Mesh(this.clothGeometry, clothMat2);
-    const clothMesh3 = new THREE.Mesh(this.clothGeometry, clothMat3);
-    const clothMesh4 = new THREE.Mesh(this.clothGeometry, clothMat4);
-    const clothMesh5 = new THREE.Mesh(this.clothGeometry, clothMat5);
-    const clothMesh6 = new THREE.Mesh(this.clothGeometry, clothMat6);
-    const clothMesh7 = new THREE.Mesh(this.clothGeometry, clothMat7);
-    const clothMesh8 = new THREE.Mesh(this.clothGeometry, clothMat8);
+    this.clothMeshes = [];
+    for (let i = 0; i < 8; i++) {
+      this.clothMeshes[i] = new THREE.Mesh(
+        this.clothGeometry,
+        this.clothMaterials[i]
+      );
+    }
 
-    clothMesh1.position.set(-2, 0, 0);
-    clothMesh2.position.set(-3, 0, 0);
-    clothMesh3.position.set(-4, 0, 0);
-    clothMesh4.position.set(-5, 0, 0);
-    clothMesh5.position.set(-2, -1, 0);
-    clothMesh6.position.set(-3, -1, 0);
-    clothMesh7.position.set(-4, -1, 0);
-    clothMesh8.position.set(-5, -1, 0);
+    this.clothMeshes[0].position.set(-2, 0, 0);
+    this.clothMeshes[1].position.set(-3, 0, 0);
+    this.clothMeshes[2].position.set(-4, 0, 0);
+    this.clothMeshes[3].position.set(-5, 0, 0);
+    this.clothMeshes[4].position.set(-2, -1, 0);
+    this.clothMeshes[5].position.set(-3, -1, 0);
+    this.clothMeshes[6].position.set(-4, -1, 0);
+    this.clothMeshes[7].position.set(-5, -1, 0);
 
     this.clothGroup = new THREE.Group();
     this.clothGroup.add(
-      clothMesh1,
-      clothMesh2,
-      clothMesh3,
-      clothMesh4,
-      clothMesh5,
-      clothMesh6,
-      clothMesh7,
-      clothMesh8
+      this.clothMeshes[0],
+      this.clothMeshes[1],
+      this.clothMeshes[2],
+      this.clothMeshes[3],
+      this.clothMeshes[4],
+      this.clothMeshes[5],
+      this.clothMeshes[6],
+      this.clothMeshes[7]
     );
     this.clothGroup.position.set(-9.4, 1.7, 10.95);
     // this.clothGroup.position.set(4, 1.7, 1.67);
