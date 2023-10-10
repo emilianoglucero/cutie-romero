@@ -20,8 +20,8 @@ export default class ClothPlane {
       gravity: new CANNON.Vec3(0, -1000, 0), // m/s²
       // gravity: new CANNON.Vec3(0, -9.82, 0), // m/s²
     });
-    this.Nx = 30;
-    this.Ny = 30;
+    this.Nx = 33;
+    this.Ny = 33;
     const mass = 1;
     const clothSize = 1.9;
     const dist = clothSize / this.Nx;
@@ -110,8 +110,7 @@ export default class ClothPlane {
       this.clothMeshes[6],
       this.clothMeshes[7]
     );
-    this.clothGroup.position.set(-9.4, 1.7, 10.95);
-    // this.clothGroup.position.set(4, 1.7, 1.67);
+    this.clothGroup.position.set(3.42, 9, 9);
 
     this.scene.add(this.clothGroup);
 
