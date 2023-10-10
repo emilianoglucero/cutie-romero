@@ -6,6 +6,7 @@ export default class Clouds {
     this.experience = experience;
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
+    this.debug = this.experience.experience.debug;
     this.setClouds();
     //try to use BufferGeometryUtils.mergeBufferGeometries
   }
@@ -197,7 +198,7 @@ export default class Clouds {
     this.cloudMaterial = new THREE.RawShaderMaterial({
       glslVersion: THREE.GLSL3,
       uniforms: {
-        base: { value: new THREE.Color(0x798aa0) },
+        base: { value: new THREE.Color(0xe6dae4) },
         map: { value: this.texture },
         cameraPos: { value: new THREE.Vector3() },
         threshold: { value: 0.25 },
@@ -214,15 +215,168 @@ export default class Clouds {
     });
 
     this.cloud1 = new THREE.Mesh(this.cloudGeometry, this.cloudMaterial);
-    this.cloud1.position.set(2, 0, 16);
+    this.cloud1.position.set(-5, 3, -9);
+    this.cloud1.scale.set(-9, -5, -9);
     this.cloud2 = new THREE.Mesh(this.cloudGeometry, this.cloudMaterial);
-    this.cloud2.position.set(-2, 0, 15);
+    this.cloud2.position.set(18.58, 8.32, 10.04);
+    this.cloud2.scale.set(-7, -5, -7);
     this.cloud3 = new THREE.Mesh(this.cloudGeometry, this.cloudMaterial);
-    this.cloud3.position.set(0, 0, 13);
+    this.cloud3.position.set(0, 0, 11);
+    this.cloud3.scale.set(-7, -5, -7);
     this.cloud4 = new THREE.Mesh(this.cloudGeometry, this.cloudMaterial);
     this.cloud4.position.set(2.78, -0.3, 0);
     this.cloud4.scale.set(2.6, 1.5, 1.5);
-    this.scene.add(this.cloud1, this.cloud2, this.cloud3, this.cloud4);
+    this.cloud5 = new THREE.Mesh(this.cloudGeometry, this.cloudMaterial);
+    this.cloud5.position.set(-15, -4, 0);
+    this.cloud5.scale.set(-7, -5, -7);
+    this.scene.add(
+      this.cloud1,
+      this.cloud2,
+      this.cloud3,
+      this.cloud4,
+      this.cloud5
+    );
+
+    // Debug
+    if (this.debug.active) {
+      this.debugFolder = this.debug.ui.addFolder("Clouds");
+      this.debugFolder
+        .add(this.cloud1.position, "x", -100, 100, 0.01)
+        .name("cloud1 x position");
+      this.debugFolder
+        .add(this.cloud1.position, "y", -100, 100, 0.01)
+        .name("cloud1 y position");
+      this.debugFolder
+        .add(this.cloud1.position, "z", -100, 100, 0.01)
+        .name("cloud1 z position");
+      this.debugFolder
+        .add(this.cloud1.scale, "x", -100, 100, 0.01)
+        .name("cloud1 x scale");
+      this.debugFolder
+        .add(this.cloud1.scale, "y", -100, 100, 0.01)
+        .name("cloud1 y scale");
+      this.debugFolder
+        .add(this.cloud1.scale, "z", -100, 100, 0.01)
+        .name("cloud1 z scale");
+      this.debugFolder
+        .add(this.cloud1.rotation, "x", -100, 100, 0.01)
+        .name("cloud1 x rotation");
+      this.debugFolder
+        .add(this.cloud1.rotation, "y", -100, 100, 0.01)
+        .name("cloud1 y rotation");
+      this.debugFolder
+        .add(this.cloud1.rotation, "z", -100, 100, 0.01)
+        .name("cloud1 z rotation");
+      this.debugFolder
+        .add(this.cloudMaterial.uniforms.threshold, "value", -100, 100, 0.01)
+        .name("cloudMaterial threshold");
+      this.debugFolder
+        .add(this.cloudMaterial.uniforms.opacity, "value", -100, 100, 0.01)
+        .name("cloudMaterial opacity");
+      this.debugFolder
+        .add(this.cloudMaterial.uniforms.range, "value", -100, 100, 0.01)
+        .name("cloudMaterial range");
+      this.debugFolder
+        .add(this.cloudMaterial.uniforms.steps, "value", -100, 100, 0.01)
+        .name("cloudMaterial steps");
+      this.debugFolder
+        .add(this.cloudMaterial.uniforms.frame, "value", -100, 100, 0.01)
+        .name("cloudMaterial frame");
+
+      this.debugFolder
+        .add(this.cloud2.position, "x", -100, 100, 0.01)
+        .name("cloud2 x position");
+      this.debugFolder
+        .add(this.cloud2.position, "y", -100, 100, 0.01)
+        .name("cloud2 y position");
+      this.debugFolder
+        .add(this.cloud2.position, "z", -100, 100, 0.01)
+        .name("cloud2 z position");
+      this.debugFolder
+        .add(this.cloud2.scale, "x", -100, 100, 0.01)
+        .name("cloud2 x scale");
+      this.debugFolder
+        .add(this.cloud2.scale, "y", -100, 100, 0.01)
+        .name("cloud2 y scale");
+      this.debugFolder
+        .add(this.cloud2.scale, "z", -100, 100, 0.01)
+        .name("cloud2 z scale");
+      this.debugFolder
+        .add(this.cloud2.rotation, "x", -100, 100, 0.01)
+        .name("cloud2 x rotation");
+      this.debugFolder
+        .add(this.cloud2.rotation, "y", -100, 100, 0.01)
+        .name("cloud2 y rotation");
+      this.debugFolder
+        .add(this.cloud2.rotation, "z", -100, 100, 0.01)
+        .name("cloud2 z rotation");
+
+      this.debugFolder
+        .add(this.cloud3.position, "x", -100, 100, 0.01)
+        .name("cloud3 x position");
+      this.debugFolder
+        .add(this.cloud3.position, "y", -100, 100, 0.01)
+        .name("cloud3 y position");
+      this.debugFolder
+        .add(this.cloud3.position, "z", -100, 100, 0.01)
+        .name("cloud3 z position");
+      this.debugFolder
+        .add(this.cloud3.scale, "x", -100, 100, 0.01)
+        .name("cloud3 x scale");
+      this.debugFolder
+        .add(this.cloud3.scale, "y", -100, 100, 0.01)
+        .name("cloud3 y scale");
+      this.debugFolder
+        .add(this.cloud3.scale, "z", -100, 100, 0.01)
+        .name("cloud3 z scale");
+      this.debugFolder
+        .add(this.cloud3.rotation, "x", -100, 100, 0.01)
+        .name("cloud3 x rotation");
+      this.debugFolder
+        .add(this.cloud3.rotation, "y", -100, 100, 0.01)
+        .name("cloud3 y rotation");
+      this.debugFolder
+        .add(this.cloud3.rotation, "z", -100, 100, 0.01)
+        .name("cloud3 z rotation");
+
+      this.debugFolder
+        .add(this.cloud4.position, "x", -100, 100, 0.01)
+        .name("cloud4 x position");
+      this.debugFolder
+        .add(this.cloud4.position, "y", -100, 100, 0.01)
+        .name("cloud4 y position");
+      this.debugFolder
+        .add(this.cloud4.position, "z", -100, 100, 0.01)
+        .name("cloud4 z position");
+      this.debugFolder
+        .add(this.cloud4.scale, "x", -100, 100, 0.01)
+        .name("cloud4 x scale");
+      this.debugFolder
+        .add(this.cloud4.scale, "y", -100, 100, 0.01)
+        .name("cloud4 y scale");
+      this.debugFolder
+        .add(this.cloud4.scale, "z", -100, 100, 0.01)
+        .name("cloud4 z scale");
+      this.debugFolder
+        .add(this.cloud4.rotation, "x", -100, 100, 0.01)
+        .name("cloud4 x rotation");
+      this.debugFolder
+        .add(this.cloud4.rotation, "y", -100, 100, 0.01)
+        .name("cloud4 y rotation");
+      this.debugFolder
+        .add(this.cloud4.rotation, "z", -100, 100, 0.01)
+        .name("cloud4 z rotation");
+
+      this.debugFolder
+        .add(this.cloud5.position, "x", -100, 100, 0.01)
+        .name("cloud5 x position");
+      this.debugFolder
+        .add(this.cloud5.position, "y", -100, 100, 0.01)
+        .name("cloud5 y position");
+      this.debugFolder
+        .add(this.cloud5.position, "z", -100, 100, 0.01)
+        .name("cloud5 z position");
+    }
   }
 
   update() {
