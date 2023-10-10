@@ -43,6 +43,7 @@ export default class CutiSonImages {
     uniform sampler2D imageTexture;
 uniform float time; // Time for animation
 uniform bool isHovered; // Hovered state
+uniform float noiseFactor; // New uniform for noise intensity
 // uniform float dissolveFactor; // Dissolve factor
 varying vec2 vUv;
 
@@ -136,8 +137,8 @@ void main() {
   vec4 color;
 
       // Apply bubble effect using noise
-      float noiseFactor = snoise(vec3(vUv * 10.0, time)) * 0.1;
-      vec2 distortedUV = vUv + vec2(noiseFactor, noiseFactor);
+      float noiseValue = snoise(vec3(vUv * 10.0, time)) * noiseFactor;
+      vec2 distortedUV = vUv + vec2(noiseValue, noiseValue);
       color = texture2D(imageTexture, distortedUV);
       if (isHovered) {
         // If hovered, use the original image
@@ -157,6 +158,7 @@ void main() {
           imageTexture: { value: this.textures[`cutiSonTexture${i + 1}`] },
           time: { value: 0.0 },
           isHovered: { value: false },
+          noiseFactor: { value: this.noiseFactor },
         },
         vertexShader,
         fragmentShader,
@@ -185,7 +187,21 @@ void main() {
       this.cutiSon3,
       this.cutiSon4
     );
-    this.cutiSonGroup.position.set(0, 0, 0.33);
+    // this.cutiSonGroup.position.set(0, -4, 10);
+    // this.cutiSonGroup.rotation.set(3.11, 0, 0);
+    // this.cutiSonGroup.matrixAutoUpdate = false;
+
+    // x
+    // :
+    // -10.82506897603845
+    // y
+    // :
+    // 0.5490905289693344
+    // z
+    // :
+    // 13.235146167754374
+    this.cutiSonGroup.position.set(-11, 0.51, 13);
+    this.cutiSonGroup.rotation.set(0, 0, 0);
     this.scene.add(this.cutiSonGroup);
     this.objectsToTest = [
       this.cutiSonGroup.children[0],
@@ -204,6 +220,8 @@ void main() {
 
       // console.log(this.mouse);
     });
+
+    this.noiseFactor = 0.0;
 
     // Debug
     if (this.debug.active) {
@@ -294,6 +312,16 @@ void main() {
       this.debugFolder
         .add(this.cutiSonGroup.position, "z", -100, 100, 0.01)
         .name("Group position z");
+
+      this.debugFolder
+        .add(this.cutiSonGroup.rotation, "x", -10, 10, 0.01)
+        .name("Group rotation x");
+      this.debugFolder
+        .add(this.cutiSonGroup.rotation, "y", -10, 10, 0.01)
+        .name("Group rotation y");
+      this.debugFolder
+        .add(this.cutiSonGroup.rotation, "z", -10, 10, 0.01)
+        .name("Group rotation z");
     }
   }
 
@@ -307,13 +335,20 @@ void main() {
 
     for (const intersect of intersects) {
       intersect.object.material.uniforms.isHovered.value = true;
+      this.noiseFactor = 0.0;
     }
 
     for (const object of this.objectsToTest) {
       if (!intersects.find((intersect) => intersect.object === object)) {
         object.material.uniforms.time.value += 0.005;
         object.material.uniforms.isHovered.value = false;
+        this.noiseFactor += 0.001;
+        this.noiseFactor = Math.min(1, this.noiseFactor + 0.01);
       }
+    }
+
+    for (let i = 0; i < 4; i++) {
+      this.cutiSonMaterials[i].uniforms.noiseFactor.value = this.noiseFactor;
     }
   }
 }
