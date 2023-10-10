@@ -11,6 +11,7 @@ import ExperienceStats from "../Utils/ExperienceStats.js";
 import ClothPlane from "./ClothPlane.js";
 import CutiPlaneImagesTitle from "./CutiPlaneImagesTitle.js";
 import CutiVideos from "./CutiVideos.js";
+import CutiSonImages from "./CutiSonImages.js";
 export default class World {
   constructor(experience) {
     this.experience = experience;
@@ -25,14 +26,15 @@ export default class World {
       this.environment = new Environment(this);
       this.sky = new SceneSky(this);
       this.cutiDancingModel = new CutiDancingModel(this);
-      this.cutiPlaneImageTitle = new CutiPlaneImagesTitle(this);
+      this.cutiPlaneImageTitle = new CutiPlaneImagesTitle(this); //drop 10 fps
       this.clouds = new Clouds(this);
       this.butterflies = new Butterflies(this);
       this.cutiPlaneImages = new CutiPlaneImages(this);
-      this.rainbow = new Rainbow(this);
+      this.rainbow = new Rainbow(this); //drop like 5fps
       this.stats = new ExperienceStats(this);
-      this.clothPlane = new ClothPlane(this);
-      this.cutiVideos = new CutiVideos(this);
+      this.clothPlane = new ClothPlane(this); //drop like 20-25fps
+      this.cutiVideos = new CutiVideos(this); //drop like 20fps
+      this.cutiSonImages = new CutiSonImages(this);
     });
   }
 
@@ -51,6 +53,9 @@ export default class World {
     }
     if (this.cutiVideos) {
       this.cutiVideos.update();
+    }
+    if (this.cutiSonImages) {
+      this.cutiSonImages.update();
     }
   }
 }

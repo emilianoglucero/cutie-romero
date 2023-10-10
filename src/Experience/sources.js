@@ -74,4 +74,24 @@ export default [
     type: "planeTexture",
     path: ["face/normal.png"],
   },
+  {
+    name: "cutiSonTexture1",
+    type: "planeTexture",
+    path: ["textures/cuti-son/cuti-son-1.jpg"],
+  },
+  {
+    name: "cutiSonTexture2",
+    type: "planeTexture",
+    path: ["textures/cuti-son/cuti-son-2.jpg"],
+  },
+  {
+    name: "cutiSonTexture3",
+    type: "planeTexture",
+    path: ["textures/cuti-son/cuti-son-3.jpg"],
+  },
+  {
+    name: "cutiSonTexture4",
+    type: "planeTexture",
+    path: ["textures/cuti-son/cuti-son-4.jpg"],
+  },
 ];
