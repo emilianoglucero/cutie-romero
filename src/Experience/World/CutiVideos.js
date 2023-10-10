@@ -64,7 +64,7 @@ export default class CutiVideos {
 
   setGeometry() {
     this.videoBoxGeometry = new THREE.BoxGeometry(1, 1, 1, 1);
-    this.videoCylinderGeometry = new THREE.CylinderGeometry(5, 5, 20, 32);
+    this.videoCylinderGeometry = new THREE.CylinderGeometry(5, 5, 20, 12);
   }
 
   setMesh() {
@@ -72,47 +72,59 @@ export default class CutiVideos {
       this.videoCylinderGeometry,
       this.videoMaterials[0]
     );
-    this.videoMesh1.position.set(10, 6.4, 10);
+    this.videoMesh1.matrixAutoUpdate = false;
+    this.videoMesh1.position.set(8, -22, 18.6);
     this.videoMesh1.scale.set(1.8, 0.8, 1.5);
-    this.videoMesh1.rotation.set(0, 2.5, 0);
+    this.videoMesh1.rotation.set(0, 0, 0);
+    this.videoMesh1.updateMatrix();
 
     this.videoMesh2 = new THREE.Mesh(
       this.videoBoxGeometry,
       this.videoMaterials[1]
     );
-    this.videoMesh2.position.set(10.95, 8.41, 13.5);
+    this.videoMesh2.matrixAutoUpdate = false;
+    this.videoMesh2.position.set(10.95, -19.6, 13.5);
     this.videoMesh2.rotation.set(0, 0, 0.34);
     this.videoMesh2.scale.set(2, 2, 2);
+    this.videoMesh2.updateMatrix();
 
     this.videoMesh3 = new THREE.Mesh(
       this.videoBoxGeometry,
       this.videoMaterials[2]
     );
-    this.videoMesh3.position.set(12.2, 4.7, 10);
+    this.videoMesh3.matrixAutoUpdate = false;
+    this.videoMesh3.position.set(12.2, -24.8, 15.1);
     this.videoMesh3.rotation.set(0, 3, -0.4);
     this.videoMesh3.scale.set(2, 2, 2);
+    this.videoMesh3.updateMatrix();
 
     this.videoMesh4 = new THREE.Mesh(
       this.videoBoxGeometry,
       this.videoMaterials[3]
     );
-    this.videoMesh4.position.set(4.5, 5.8, 9.6);
+    this.videoMesh4.matrixAutoUpdate = false;
+    this.videoMesh4.position.set(4.5, -20, 18.2);
     this.videoMesh4.rotation.set(0, 3, -0.4);
     this.videoMesh4.scale.set(2, 2, 2);
+    this.videoMesh4.updateMatrix();
 
     this.videoMesh5 = new THREE.Mesh(
       this.videoBoxGeometry,
       this.videoMaterials[4]
     );
-    this.videoMesh5.position.set(12.8, 2.6, 16.6);
+    this.videoMesh5.matrixAutoUpdate = false;
+    this.videoMesh5.position.set(6, -24, 16.6);
     this.videoMesh5.scale.set(2, 2, 2);
+    this.videoMesh5.updateMatrix();
 
     this.videoMesh6 = new THREE.Mesh(
       this.videoBoxGeometry,
       this.videoMaterials[5]
     );
-    this.videoMesh6.position.set(8.4, 3.3, 13.5);
+    this.videoMesh6.matrixAutoUpdate = false;
+    this.videoMesh6.position.set(7.7, -20, 16);
     this.videoMesh6.scale.set(2, 2, 2);
+    this.videoMesh6.updateMatrix();
 
     this.videoGroup = new THREE.Group();
     this.videoGroup.add(
@@ -123,7 +135,9 @@ export default class CutiVideos {
       this.videoMesh5,
       this.videoMesh6
     );
+    this.videoGroup.matrixAutoUpdate = false;
     this.videoGroup.position.set(-9, 17, 9);
+    this.videoGroup.updateMatrix();
 
     this.scene.add(this.videoGroup);
 
