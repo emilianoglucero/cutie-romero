@@ -21,7 +21,7 @@ export default class Camera {
       45,
       this.sizes.width / this.sizes.height,
       0.1,
-      100
+      50
     );
     this.instance.position.set(0, 4.8, 4.8);
     this.instance.rotation.set(0, 0, 0);
@@ -56,24 +56,35 @@ export default class Camera {
 
     window.addEventListener("mouseup", () => {
       console.log(this.instance.position);
+      console.log(position);
 
       switch (position) {
         case 0:
-          this.moveCamera(10.3, -0.3, 4.4);
-          this.rotateCamera(-0.48, -3.14, 0);
+          // cuti image planes
+          this.moveCamera(7.1, 9.5, 5.8);
+          this.rotateCamera(0.58, -3.14, 0);
           position = 1;
           break;
         case 1:
-          this.moveCamera(-1.9, 28.8, 13.5);
-          this.rotateCamera(0.66, -3.14, 0);
+          //cuti cloth
+          this.moveCamera(0.3, 11.2, 17.1);
+          this.rotateCamera(-0.39, 0, 0);
           position = 2;
           break;
         case 2:
-          this.moveCamera(-15.1, 2.3, 16.2);
-          this.rotateCamera(0, -0.64, 0);
+          //cutison
+          this.moveCamera(-10.8, 0.6, 16.8);
+          this.rotateCamera(0, -0.16, 0);
           position = 3;
           break;
         case 3:
+          //cuti videos
+          this.moveCamera(-0.4, 2.4, 31.9);
+          this.rotateCamera(-0.71, 0.1, 0);
+          position = 4;
+          break;
+        case 4:
+          //cuti videos
           this.moveCamera(-0.3, 0.33, 6.44);
           this.rotateCamera(0.07, -0.02, 0);
           position = 0;
