@@ -45,6 +45,11 @@ export default [
     path: ["textures/cuti-plane/cuti-9.jpg"],
   },
   {
+    name: "cutiImagePlaneTexture10",
+    type: "planeTexture",
+    path: ["textures/cuti-plane/cuti-10.jpg"],
+  },
+  {
     name: "cutiDancingModel",
     type: "fbx",
     path: ["models/fbx/cutiDancingTwerk.fbx"],
