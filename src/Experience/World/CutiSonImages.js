@@ -168,7 +168,7 @@ void main() {
 
   setMesh() {
     this.cutiSon1 = new THREE.Mesh(this.geometry, this.cutiSonMaterials[0]);
-    this.cutiSon1.position.set(1.21, 0, 0);
+    this.cutiSon1.position.set(1.15, 0, 0);
     this.cutiSon1.rotation.set(0, 0.6, 0);
     this.cutiSon2 = new THREE.Mesh(this.geometry, this.cutiSonMaterials[1]);
     this.cutiSon2.position.set(-0.51, 0, 0);
@@ -177,7 +177,7 @@ void main() {
     this.cutiSon3.position.set(0.29, -0.53, 0.02);
     this.cutiSon3.rotation.set(0.04, 0, 0);
     this.cutiSon4 = new THREE.Mesh(this.geometry, this.cutiSonMaterials[3]);
-    this.cutiSon4.position.set(0.35, 0.82, 0);
+    this.cutiSon4.position.set(0.29, 0.82, 0);
     this.cutiSon4.rotation.set(0, 0, 0);
     this.cutiSonGroup = new THREE.Group();
 
@@ -187,20 +187,7 @@ void main() {
       this.cutiSon3,
       this.cutiSon4
     );
-    // this.cutiSonGroup.position.set(0, -4, 10);
-    // this.cutiSonGroup.rotation.set(3.11, 0, 0);
-    // this.cutiSonGroup.matrixAutoUpdate = false;
-
-    // x
-    // :
-    // -10.82506897603845
-    // y
-    // :
-    // 0.5490905289693344
-    // z
-    // :
-    // 13.235146167754374
-    this.cutiSonGroup.position.set(-11, 0.51, 13);
+    this.cutiSonGroup.position.set(-11.5, 0.51, 13);
     this.cutiSonGroup.rotation.set(0, 0, 0);
     this.scene.add(this.cutiSonGroup);
     this.objectsToTest = [
