@@ -17,7 +17,7 @@ export default class CutiDancingModel {
   setModel() {
     this.model = this.resource;
     this.model.scale.set(0.006, 0.006, 0.006);
-    this.model.position.set(2.78, 0, 0);
+    this.model.position.set(3, 0, 0);
     this.scene.add(this.model);
 
     // Debug

@@ -224,7 +224,7 @@ export default class Clouds {
     this.cloud3.position.set(0, 0, 11);
     this.cloud3.scale.set(-7, -5, -7);
     this.cloud4 = new THREE.Mesh(this.cloudGeometry, this.cloudMaterial);
-    this.cloud4.position.set(2.78, -0.3, 0);
+    this.cloud4.position.set(3, -0.3, 0);
     this.cloud4.scale.set(2.6, 1.5, 1.5);
     this.cloud5 = new THREE.Mesh(this.cloudGeometry, this.cloudMaterial);
     this.cloud5.position.set(-15, -4, 0);

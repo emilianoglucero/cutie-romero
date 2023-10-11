@@ -74,21 +74,21 @@ export default class CutiPlaneImagesTitle {
       this.cutiMaterial1
     );
     this.mesh1.matrixAutoUpdate = false;
-    this.mesh1.position.set(-0.43, 0.66, 2.88);
+    this.mesh1.position.set(-0.43, 1.03, 2.88);
     this.mesh1.scale.set(1.35, 1.35, -7.3);
     this.mesh1.rotation.set(0, 0.66, 0.1);
     this.mesh1.updateMatrix();
     this.lod.addLevel(this.mesh1, 0);
 
     this.mesh1MediumDetails.matrixAutoUpdate = false;
-    this.mesh1MediumDetails.position.set(-0.43, 0.66, 2.88);
+    this.mesh1MediumDetails.position.set(-0.43, 1.03, 2.88);
     this.mesh1MediumDetails.scale.set(1.35, 1.35, -7.3);
     this.mesh1MediumDetails.rotation.set(0, 0.66, 0.1);
     this.mesh1MediumDetails.updateMatrix();
     this.lod.addLevel(this.mesh1MediumDetails, 10);
 
     this.mesh1LowDetails.matrixAutoUpdate = false;
-    this.mesh1LowDetails.position.set(-0.43, 0.66, 2.88);
+    this.mesh1LowDetails.position.set(-0.43, 1.03, 2.88);
     this.mesh1LowDetails.scale.set(1.35, 1.35, -7.3);
     this.mesh1LowDetails.rotation.set(0, 0.66, 0.1);
     this.mesh1LowDetails.updateMatrix();
@@ -96,14 +96,14 @@ export default class CutiPlaneImagesTitle {
 
     this.flower1 = new THREE.Mesh(this.geometry1, this.cutiMaterial2);
     this.flower1.matrixAutoUpdate = false;
-    this.flower1.position.set(0.84, 1.1, 0);
+    this.flower1.position.set(1.6, 1.1, 0);
     this.flower1.rotation.set(0, 0, 0.34);
     this.flower1.scale.set(1, 1, 1);
     this.flower1.updateMatrix();
 
     this.flower2 = new THREE.Mesh(this.geometry1, this.cutiMaterial3);
     this.flower2.matrixAutoUpdate = false;
-    this.flower2.position.set(-0.69, -0.94, 0);
+    this.flower2.position.set(-1.96, -0.69, 0);
     this.flower2.rotation.set(0, 3, -0.4);
     this.flower2.scale.set(1, 1, 1);
     this.flower2.updateMatrix();
