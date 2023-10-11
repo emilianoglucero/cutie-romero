@@ -3,6 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { FirstPersonControls } from "three/examples/jsm/controls/FirstPersonControls.js";
 import gsap from "gsap";
 import { FlyControls } from "three/addons/controls/FlyControls.js";
+import { PointerLockControls } from "three/addons/controls/PointerLockControls.js";
 
 export default class Camera {
   constructor(experience) {
@@ -17,41 +18,25 @@ export default class Camera {
   }
 
   setInstance() {
+    /**
+     * Group
+     */
+    this.instanceGroup = new THREE.Group();
+    this.scene.add(this.instanceGroup);
+
+    // Base Camera
     this.instance = new THREE.PerspectiveCamera(
       45,
       this.sizes.width / this.sizes.height,
       0.1,
       50
     );
-    this.instance.position.set(0, 4.8, 4.8);
+    this.instance.position.set(0, 5.1, 4.8);
     this.instance.rotation.set(0, 0, 0);
-    this.instance.lookAt(0, 4.8, 4.8);
-    this.scene.add(this.instance);
+    this.instance.lookAt(0, 5.1, 4.8);
+    this.instanceGroup.add(this.instance);
   }
   setOrbitControls() {
-    // this.controls = new OrbitControls(this.instance, this.canvas);
-    // this.controls.enableDamping = true;
-
-    // First person camera
-    // this.controls = new FirstPersonControls(this.instance, this.canvas);
-    // this.controls.movementSpeed = 8;
-    // this.controls.lookSpeed = 0.08;
-    //add fly controls
-    // this.controls = new FlyControls(this.instance, this.canvas);
-    // this.controls.movementSpeed = 18;
-    // this.controls.domElement = this.canvas;
-    // this.controls.rollSpeed = Math.PI / 24;
-    // this.controls.autoForward = false;
-    // this.controls.dragToLook = false;
-    // this.controls.lookHorizontal = true;
-
-    // this.controls.lookVertical = true;
-    // this.controls.constrainVertical = true;
-    // this.controls.verticalMin = 1.0;
-    // this.controls.verticalMax = 2.0;
-    // this.controls.lon = -150;
-    // this.controls.lat = 120;
-
     let position = 0;
 
     window.addEventListener("mouseup", () => {
@@ -135,6 +120,21 @@ export default class Camera {
         .step(0.01)
         .name("Rotation z");
     }
+
+    /**
+     * Cursor
+     */
+
+    this.cursor = {};
+    this.cursor.x = 0;
+    this.cursor.y = 0;
+
+    window.addEventListener("mousemove", (event) => {
+      this.cursor.x = event.clientX / this.sizes.width - 0.5;
+      this.cursor.y = event.clientY / this.sizes.height - 0.5;
+      console.log(this.cursor.x, this.cursor.y);
+      console.log(this.cursor);
+    });
   }
 
   moveCamera(x, y, z) {
@@ -163,5 +163,17 @@ export default class Camera {
   update() {
     // Update controls
     // this.controls.update(this.experience.time.getDeltaClock);
+
+    // Parallax formula
+    this.parallaxX = this.cursor.x;
+    this.parallaxY = -this.cursor.y;
+    this.instanceGroup.position.x +=
+      (this.parallaxX - this.instanceGroup.position.x) *
+      9 *
+      this.experience.time.getDeltaClock;
+    this.instanceGroup.position.y +=
+      (this.parallaxY - this.instanceGroup.position.y) *
+      9 *
+      this.experience.time.getDeltaClock;
   }
 }
