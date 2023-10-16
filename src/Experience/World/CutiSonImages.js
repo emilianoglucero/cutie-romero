@@ -153,7 +153,9 @@ void main() {
 
     for (let i = 0; i < 4; i++) {
       this.cutiSonMaterials[i] = new THREE.ShaderMaterial({
-        precision: "lowp",
+        // precision: "lowp",
+        // use precision highp because otherwise the shader won't work on some low end mobile devices
+        precision: "highp",
         uniforms: {
           imageTexture: { value: this.textures[`cutiSonTexture${i + 1}`] },
           time: { value: 0.0 },
