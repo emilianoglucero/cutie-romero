@@ -99,4 +99,9 @@ export default [
     type: "planeTexture",
     path: ["textures/cuti-son/cuti-son-4.jpg"],
   },
+  {
+    name: "rotatePhoneTexture",
+    type: "planeTexture",
+    path: ["textures/mobile-rotation/rotate-phone.jpg"],
+  },
 ];

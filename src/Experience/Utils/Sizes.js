@@ -1,4 +1,5 @@
 import EventEmitter from "./EventEmitter";
+import * as THREE from "three";
 
 export default class Sizes extends EventEmitter {
   constructor() {
@@ -8,7 +9,7 @@ export default class Sizes extends EventEmitter {
     this.height = window.innerHeight;
     this.pixelRatio = Math.min(window.devicePixelRatio, 2);
 
-    // Rezise
+    // Resize
     window.addEventListener("resize", () => {
       this.width = window.innerWidth;
       this.height = window.innerHeight;
