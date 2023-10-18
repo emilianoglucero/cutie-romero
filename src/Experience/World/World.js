@@ -12,6 +12,7 @@ import ClothPlane from "./ClothPlane.js";
 import CutiPlaneImagesTitle from "./CutiPlaneImagesTitle.js";
 import CutiVideos from "./CutiVideos.js";
 import CutiSonImages from "./CutiSonImages.js";
+import Music from "./Music.js";
 export default class World {
   constructor(experience) {
     this.experience = experience;
@@ -23,6 +24,7 @@ export default class World {
       //Setup
 
       this.title3D = new Title3D(this);
+      this.music = new Music(this);
       this.environment = new Environment(this);
       this.sky = new SceneSky(this);
       this.cutiDancingModel = new CutiDancingModel(this);

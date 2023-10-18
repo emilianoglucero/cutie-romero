@@ -9,6 +9,7 @@ export default class Intro {
     this.loadingBarElement = document.querySelector(".loading-bar");
     this.cursorElement = document.querySelector(".cursor");
     this.btnNextElement = document.querySelector(".btn-next");
+    this.btnMusic = document.querySelector(".btn-music");
 
     this.setIntro();
   }
@@ -61,6 +62,7 @@ export default class Intro {
             this.destroy();
             this.cursorElement.classList.add("big");
             this.btnNextElement.classList.add("active");
+            this.btnMusic.style.display = "block";
           },
         });
         this.loadingBarElement.classList.add("ended");

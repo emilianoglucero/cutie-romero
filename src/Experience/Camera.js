@@ -142,8 +142,6 @@ export default class Camera {
     window.addEventListener("mousemove", (event) => {
       this.cursor.x = event.clientX / this.sizes.width - 0.5;
       this.cursor.y = event.clientY / this.sizes.height - 0.5;
-      // console.log(this.cursor.x, this.cursor.y);
-      // console.log(this.cursor);
     });
   }
 
@@ -155,8 +153,6 @@ export default class Camera {
       z,
       ease: "back.out",
       onComplete: () => {
-        console.log(this.btnNextElement);
-        console.log("completeeee");
         this.cursorElement.classList.add("big");
         this.btnNextElement.classList.add("active");
       },
