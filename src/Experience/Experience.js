@@ -10,6 +10,7 @@ import sources from "./sources.js";
 import Debug from "./Utils/Debug.js";
 import Intro from "./Intro.js";
 import Rotation from "./Utils/Rotation.js";
+import Cursor from "./Utils/Cursor.js";
 
 export default class Experience {
   constructor() {
@@ -23,6 +24,7 @@ export default class Experience {
     this.debug = new Debug();
     this.sizes = new Sizes();
     this.rotation = new Rotation();
+    this.cursor = new Cursor();
     this.time = new Time();
     this.scene = new THREE.Scene();
     this.resources = new Resources(sources, this);

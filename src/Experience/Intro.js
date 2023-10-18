@@ -7,6 +7,8 @@ export default class Intro {
     this.resources = this.experience.resources;
 
     this.loadingBarElement = document.querySelector(".loading-bar");
+    this.cursorElement = document.querySelector(".cursor");
+    this.btnNextElement = document.querySelector(".btn-next");
 
     this.setIntro();
   }
@@ -49,13 +51,16 @@ export default class Intro {
           delay: 1,
         });
         timeline.to(this.experience.camera.instance.position, {
-          duration: 7.5,
+          // duration: 7.5,
+          duration: 0.5,
           x: -0.3,
           y: 0.33,
           z: 6.44,
           ease: "back.out",
           onComplete: () => {
             this.destroy();
+            this.cursorElement.classList.add("big");
+            this.btnNextElement.classList.add("active");
           },
         });
         this.loadingBarElement.classList.add("ended");

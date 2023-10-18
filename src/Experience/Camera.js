@@ -13,6 +13,9 @@ export default class Camera {
     this.canvas = this.experience.canvas;
     this.debug = this.experience.debug;
 
+    this.cursorElement = document.querySelector(".cursor");
+    this.btnNextElement = document.querySelector(".btn-next");
+
     this.setInstance();
     this.setOrbitControls();
   }
@@ -37,12 +40,19 @@ export default class Camera {
     this.instanceGroup.add(this.instance);
   }
   setOrbitControls() {
+    //orbit controls
+    // this.controls = new OrbitControls(
+    //   this.instance,
+    //   this.canvas,
+    //   this.sizes.width / this.sizes.height
+    // );
+    // this.controls.enableDamping = true;
+
     let position = 0;
 
     window.addEventListener("mouseup", () => {
-      console.log(this.instance.position);
-      console.log(position);
-
+      // console.log(this.instance.position);
+      // console.log(position);
       switch (position) {
         case 0:
           // cuti image planes
@@ -132,8 +142,8 @@ export default class Camera {
     window.addEventListener("mousemove", (event) => {
       this.cursor.x = event.clientX / this.sizes.width - 0.5;
       this.cursor.y = event.clientY / this.sizes.height - 0.5;
-      console.log(this.cursor.x, this.cursor.y);
-      console.log(this.cursor);
+      // console.log(this.cursor.x, this.cursor.y);
+      // console.log(this.cursor);
     });
   }
 
@@ -144,7 +154,15 @@ export default class Camera {
       y,
       z,
       ease: "back.out",
+      onComplete: () => {
+        console.log(this.btnNextElement);
+        console.log("completeeee");
+        this.cursorElement.classList.add("big");
+        this.btnNextElement.classList.add("active");
+      },
     });
+    this.cursorElement.classList.remove("big");
+    this.btnNextElement.classList.remove("active");
   }
 
   rotateCamera(x, y, z) {
