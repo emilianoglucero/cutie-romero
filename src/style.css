@@ -89,9 +89,7 @@ body {
   border-radius: 50%;
   position: absolute;
   top: 10%;
-  left: 85%;
-  margin-top: 0px;
-  margin-left: -26px;
+  right: 10%;
   background: #ffffff;
   height: 24px;
   width: 40px;
