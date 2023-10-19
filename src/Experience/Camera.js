@@ -15,6 +15,9 @@ export default class Camera {
 
     this.cursorElement = document.querySelector(".cursor");
     this.btnNextElement = document.querySelector(".btn-next");
+    this.btnMusic = document.querySelector(".btn-music");
+
+    this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     this.setInstance();
     this.setOrbitControls();
@@ -50,42 +53,66 @@ export default class Camera {
 
     let position = 0;
 
-    window.addEventListener("mouseup", () => {
-      // console.log(this.instance.position);
-      // console.log(position);
-      switch (position) {
-        case 0:
-          // cuti image planes
-          this.moveCamera(7.1, 9.5, 5.8);
-          this.rotateCamera(0.58, -3.14, 0);
-          position = 1;
-          break;
-        case 1:
-          //cuti cloth
-          this.moveCamera(0.3, 11.2, 17.1);
-          this.rotateCamera(-0.39, 0, 0);
-          position = 2;
-          break;
-        case 2:
-          //cutison
-          this.moveCamera(-10.8, 0.6, 16.8);
-          this.rotateCamera(0, -0.16, 0);
-          position = 3;
-          break;
-        case 3:
-          //cuti videos
-          this.moveCamera(-0.4, 2.4, 31.9);
-          this.rotateCamera(-0.71, 0.1, 0);
-          position = 4;
-          break;
-        case 4:
-          //cuti videos
-          this.moveCamera(-0.3, 0.33, 6.44);
-          this.rotateCamera(0.07, -0.02, 0);
-          position = 0;
-          break;
+    window.addEventListener("mouseup", (event) => {
+      if (conditionsToMoveCamera(event.target, this.btnMusic, this.isMobile)) {
+        switch (position) {
+          case 0:
+            // cuti image planes
+            this.moveCamera(7.1, 9.5, 5.8);
+            this.rotateCamera(0.58, -3.14, 0);
+            position = 1;
+            break;
+          case 1:
+            //cuti cloth
+            this.moveCamera(0.3, 11.2, 17.1);
+            this.rotateCamera(-0.39, 0, 0);
+            position = 2;
+            break;
+          case 2:
+            //cutison
+            this.moveCamera(-10.8, 0.6, 16.8);
+            this.rotateCamera(0, -0.16, 0);
+            position = 3;
+            break;
+          case 3:
+            //cuti videos
+            this.moveCamera(-0.4, 2.4, 31.9);
+            this.rotateCamera(-0.71, 0.1, 0);
+            position = 4;
+            break;
+          case 4:
+            //cuti videos
+            this.moveCamera(-0.3, 0.33, 6.44);
+            this.rotateCamera(0.07, -0.02, 0);
+            position = 0;
+            break;
+        }
       }
     });
+
+    function isInsideBtnMusic(target) {
+      if (target.closest(".stop") || target.closest(".play")) {
+        return true;
+      }
+      return false;
+    }
+
+    function conditionsToMoveCamera(target, btnMusic, isMobile) {
+      if (isMobile === true) {
+        if (target.closest(".btn-next")) {
+          return true;
+        }
+        return false;
+      } else {
+        if (
+          isInsideBtnMusic(target) === false &&
+          btnMusic.style.display === "block"
+        ) {
+          return true;
+        }
+        return false;
+      }
+    }
 
     // Debug
 

@@ -28,5 +28,13 @@ export default class Cursor {
       xSetBallBig(posB.x);
       ySetBallBig(posB.y);
     });
+
+    const btnMusic = document.querySelector(".btn-music");
+    btnMusic.addEventListener("mouseenter", () => {
+      cursor.classList.remove("big");
+    });
+    btnMusic.addEventListener("mouseleave", () => {
+      cursor.classList.add("big");
+    });
   }
 }
