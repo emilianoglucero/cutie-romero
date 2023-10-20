@@ -6,7 +6,6 @@ export default class SceneSky {
     this.experience = experience;
     this.scene = this.experience.scene;
     this.renderer = this.experience.experience.renderer;
-    // this.debug = this.experience.experience.debug;
     this.setSceneSky();
   }
 
@@ -42,31 +41,5 @@ export default class SceneSky {
     this.uniforms["sunPosition"].value.copy(this.sun);
 
     this.renderer.toneMappingExposure = this.effectController.exposure;
-
-    // Debug
-    // if (this.debug.active) {
-    //   this.skyFolder = this.debug.ui.addFolder("Sky");
-    //   this.skyFolder
-    //     .add(this.effectController, "turbidity", 0.0, 20.0, 0.1)
-    //     .onChange(guiChanged()());
-    //   this.skyFolder
-    //     .add(this.effectController, "rayleigh", 0.0, 4, 0.001)
-    //     .onChange(guiChanged()());
-    //   this.skyFolder
-    //     .add(this.effectController, "mieCoefficient", 0.0, 0.1, 0.001)
-    //     .onChange(guiChanged()());
-    //   this.skyFolder
-    //     .add(this.effectController, "mieDirectionalG", 0.0, 1, 0.001)
-    //     .onChange(guiChanged()());
-    //   this.skyFolder
-    //     .add(this.effectController, "elevation", 0, 90, 0.1)
-    //     .onChange(guiChanged()());
-    //   this.skyFolder
-    //     .add(this.effectController, "azimuth", -180, 180, 0.1)
-    //     .onChange(guiChanged()());
-    //   this.skyFolder
-    //     .add(this.effectController, "exposure", 0, 1, 0.0001)
-    //     .onChange(guiChanged()());
-    // }
   }
 }

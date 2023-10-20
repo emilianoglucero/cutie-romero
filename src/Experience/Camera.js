@@ -43,14 +43,6 @@ export default class Camera {
     this.instanceGroup.add(this.instance);
   }
   setOrbitControls() {
-    //orbit controls
-    // this.controls = new OrbitControls(
-    //   this.instance,
-    //   this.canvas,
-    //   this.sizes.width / this.sizes.height
-    // );
-    // this.controls.enableDamping = true;
-
     let position = 0;
 
     window.addEventListener("mouseup", (event) => {

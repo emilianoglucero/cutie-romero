@@ -46,30 +46,4 @@ export default class CutiDancingModel {
       this.mixer.update(this.time.delta * 0.001);
     }
   }
-
-  // /*
-  //  ** Cuti Model
-  //  */
-  // // model
-  // const loader = new FBXLoader();
-  // // loader.load("models/fbx/cutiDancingTwerk.fbx", function (object) {
-  // loader.load("models/fbx/cutiDancingTwerk.fbx", function (object) {
-  //   mixer = new THREE.AnimationMixer(object);
-
-  //   const action = mixer.clipAction(object.animations[0]);
-  //   action.play();
-
-  //   object.traverse(function (child) {
-  //     if (child.isMesh) {
-  //       child.castShadow = true;
-  //       child.receiveShadow = true;
-  //     }
-  //   });
-
-  //   //scale object
-  //   object.scale.set(0.005, 0.005, 0.005);
-  //   //position object
-  //   object.position.set(2.37, -0.18, -0.43);
-
-  //   scene.add(object);
 }

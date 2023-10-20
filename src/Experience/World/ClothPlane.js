@@ -18,7 +18,6 @@ export default class ClothPlane {
     let world = this.world;
     world = new CANNON.World({
       gravity: new CANNON.Vec3(0, -1000, 0), // m/s²
-      // gravity: new CANNON.Vec3(0, -9.82, 0), // m/s²
     });
     this.Nx = 33;
     this.Ny = 33;
@@ -57,9 +56,6 @@ export default class ClothPlane {
           dist
         )
       );
-      // console.log(world);
-      // console.log(typeof world);
-      //   this.world = world;
     }
 
     for (let i = 0; i < this.Nx + 1; i++) {

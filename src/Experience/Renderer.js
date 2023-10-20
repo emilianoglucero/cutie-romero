@@ -17,21 +17,12 @@ export default class Renderer {
     this.instance = new THREE.WebGLRenderer({
       canvas: this.canvas,
       powerPreference: "high-performance",
-      // antialias: true,
-      // alpha: true,
     });
     // Update renderer
     this.instance.setSize(this.sizes.width, this.sizes.height);
     this.instance.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.instance.shadowMap.autoUpdate = false;
-    console.log(this.instance.info);
-    // this.instance.useLegacyLights = false
-    // this.instance.toneMapping = THREE.CineonToneMapping
-    // this.instance.toneMappingExposure = 1.75
-    // this.instance.shadowMap.enabled = true
-    // this.instance.shadowMap.type = THREE.PCFSoftShadowMap
-    // this.instance.setSize(this.sizes.width, this.sizes.height)
-    // this.instance.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    // console.log(this.instance.info);
   }
 
   resize() {

@@ -219,36 +219,6 @@ void main () {
       this.debugFolder
         .add(this.rainbows[4].rotation, "z", -100, 100, 0.1)
         .name("rainbow 5 rotation z");
-
-      // this.debugFolder
-      //   .add(this.rainbows[5].position, "x", -100, 100, 0.1)
-      //   .name("rainbow 6 position x");
-      // this.debugFolder
-      //   .add(this.rainbows[5].position, "y", -100, 100, 0.1)
-      //   .name("rainbow 6 position y");
-      // this.debugFolder
-      //   .add(this.rainbows[5].position, "z", -100, 100, 0.1)
-      //   .name("rainbow 6 position z");
-
-      // this.debugFolder
-      //   .add(this.rainbows[5].scale, "x", -10, 10, 0.1)
-      //   .name("rainbow 6 scale x");
-      // this.debugFolder
-      //   .add(this.rainbows[5].scale, "y", -10, 10, 0.1)
-      //   .name("rainbow 6 scale y");
-      // this.debugFolder
-      //   .add(this.rainbows[5].scale, "z", -10, 10, 0.1)
-      //   .name("rainbow 6 scale z");
-
-      // this.debugFolder
-      //   .add(this.rainbows[5].rotation, "x", -10, 10, 0.1)
-      //   .name("rainbow 6 rotation x");
-      // this.debugFolder
-      //   .add(this.rainbows[5].rotation, "y", -10, 10, 0.1)
-      //   .name("rainbow 6 rotation y");
-      // this.debugFolder
-      //   .add(this.rainbows[5].rotation, "z", -10, 10, 0.1)
-      //   .name("rainbow 6 rotation z");
     }
   }
 }
