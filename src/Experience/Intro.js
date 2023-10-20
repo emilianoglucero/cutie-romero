@@ -50,10 +50,13 @@ export default class Intro {
           duration: 3,
           value: 0,
           delay: 1,
+          onComplete: () => {
+            this.overlayMaterial.dispose();
+            this.scene.remove(this.overlayMesh);
+          },
         });
         timeline.to(this.experience.camera.instance.position, {
-          // duration: 7.5,
-          duration: 0.5,
+          duration: 7.5,
           x: -0.3,
           y: 0.33,
           z: 6.44,
