@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /development/   # Prevent crawling of development or test pages
+Disallow: /private/       # Prevent crawling of private or sensitive content
+Disallow: /admin/         # Prevent crawling of administrative sections
+Disallow: /tmp/           # Prevent crawling of temporary files
+
+Allow: /                # Allow crawling of the entire site
+
