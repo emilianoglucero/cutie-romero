@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@tweenjs/tween.js": "^21.0.0",
+    "@vercel/analytics": "^1.1.1",
     "cannon": "^0.6.2",
     "gsap": "^3.12.2",
     "lil-gui": "^0.18.1",
