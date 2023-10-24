@@ -49,25 +49,25 @@ export default class Camera {
       if (conditionsToMoveCamera(event.target, this.btnMusic, this.isMobile)) {
         switch (position) {
           case 0:
-            // cuti image planes
+            // cuti images title
             this.moveCamera(7.1, 9.5, 5.8);
             this.rotateCamera(0.58, -3.14, 0);
             position = 1;
             break;
           case 1:
-            //cuti cloth
+            //cuti images
             this.moveCamera(0.3, 11.2, 17.1);
             this.rotateCamera(-0.39, 0, 0);
             position = 2;
             break;
           case 2:
-            //cutison
+            //cuti cloth
             this.moveCamera(-10.8, 0.6, 16.8);
             this.rotateCamera(0, -0.16, 0);
             position = 3;
             break;
           case 3:
-            //cuti videos
+            //cutison images
             this.moveCamera(-0.4, 2.4, 31.9);
             this.rotateCamera(-0.71, 0.1, 0);
             position = 4;
