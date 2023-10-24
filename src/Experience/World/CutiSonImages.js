@@ -9,6 +9,9 @@ export default class CutiSonImages {
     this.debug = this.experience.experience.debug;
     this.sizes = this.experience.experience.sizes;
     this.raycaster = new THREE.Raycaster();
+    this.clock = this.experience.experience.time.clock;
+
+    this.numberOfImages = 5;
 
     this.setGeometry();
     this.setTextures();
@@ -18,11 +21,12 @@ export default class CutiSonImages {
 
   setGeometry() {
     this.geometry = new THREE.PlaneGeometry(1, 1, 1, 1);
+    this.geometrySatelliteImage = new THREE.PlaneGeometry(1, 2, 1, 1);
   }
 
   setTextures() {
     this.textures = {};
-    for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < 6; i++) {
       this.textures[`cutiSonTexture${i}`] =
         this.resources.items[`cutiSonTexture${i}`];
     }
@@ -31,7 +35,7 @@ export default class CutiSonImages {
   setMaterial() {
     this.cutiSonMaterials = [];
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < this.numberOfImages; i++) {
       this.cutiSonMaterials[i] = new THREE.ShaderMaterial({
         // precision: "lowp",
         // use precision highp because otherwise the shader won't work on some low end mobile devices
@@ -46,6 +50,9 @@ export default class CutiSonImages {
         fragmentShader: cutisonFragmentShader,
       });
     }
+    this.cutisonSatelliteImageMaterial = new THREE.MeshBasicMaterial({
+      map: this.textures[`cutiSonTexture5`],
+    });
   }
 
   setMesh() {
@@ -61,13 +68,19 @@ export default class CutiSonImages {
     this.cutiSon4 = new THREE.Mesh(this.geometry, this.cutiSonMaterials[3]);
     this.cutiSon4.position.set(0.29, 0.82, 0);
     this.cutiSon4.rotation.set(0, 0, 0);
+    this.cutison5 = new THREE.Mesh(
+      this.geometrySatelliteImage,
+      this.cutisonSatelliteImageMaterial
+    );
+    this.cutison5.position.set(1, 0.15, 1);
     this.cutiSonGroup = new THREE.Group();
 
     this.cutiSonGroup.add(
       this.cutiSon1,
       this.cutiSon2,
       this.cutiSon3,
-      this.cutiSon4
+      this.cutiSon4,
+      this.cutison5
     );
     this.cutiSonGroup.position.set(-11.5, 0.51, 13);
     this.cutiSonGroup.rotation.set(0, 0, 0);
@@ -171,6 +184,30 @@ export default class CutiSonImages {
         .name("cutiSon4 rotation z");
 
       this.debugFolder
+        .add(this.cutison5.position, "x", -100, 100, 0.01)
+        .name("cutison5 position x");
+
+      this.debugFolder
+        .add(this.cutison5.position, "y", -100, 100, 0.01)
+        .name("cutison5 position y");
+
+      this.debugFolder
+        .add(this.cutison5.position, "z", -100, 100, 0.01)
+        .name("cutison5 position z");
+
+      this.debugFolder
+        .add(this.cutison5.rotation, "x", -Math.PI, Math.PI, 0.01)
+        .name("cutison5 rotation x");
+
+      this.debugFolder
+        .add(this.cutison5.rotation, "y", -Math.PI, Math.PI, 0.01)
+        .name("cutison5 rotation y");
+
+      this.debugFolder
+        .add(this.cutison5.rotation, "z", -Math.PI, Math.PI, 0.01)
+        .name("cutison5 rotation z");
+
+      this.debugFolder
         .add(this.cutiSonGroup.position, "x", -100, 100, 0.01)
         .name("Group position x");
       this.debugFolder
@@ -193,6 +230,7 @@ export default class CutiSonImages {
   }
 
   update() {
+    const elapsedTime = this.clock.getElapsedTime() * 0.5;
     this.raycaster.setFromCamera(
       this.mouse,
       this.experience.experience.camera.instance
@@ -217,5 +255,11 @@ export default class CutiSonImages {
     for (let i = 0; i < 4; i++) {
       this.cutiSonMaterials[i].uniforms.noiseFactor.value = this.noiseFactor;
     }
+
+    // CutiSon 5 animation
+    const cutiAngle = elapsedTime * 0.6;
+    this.cutison5.position.x = Math.cos(cutiAngle) * 3;
+    this.cutison5.position.z = Math.sin(cutiAngle) * 2;
+    this.cutison5.position.y = Math.sin(elapsedTime * 2);
   }
 }

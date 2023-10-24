@@ -99,4 +99,9 @@ export default [
     type: "planeTexture",
     path: ["textures/cuti-son/cuti-son-4.jpg"],
   },
+  {
+    name: "cutiSonTexture5",
+    type: "planeTexture",
+    path: ["textures/cuti-son/cuti-son-5.jpg"],
+  },
 ];

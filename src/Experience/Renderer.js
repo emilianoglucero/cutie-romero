@@ -22,7 +22,6 @@ export default class Renderer {
     this.instance.setSize(this.sizes.width, this.sizes.height);
     this.instance.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.instance.shadowMap.autoUpdate = false;
-    // console.log(this.instance.info);
   }
 
   resize() {
