@@ -19,6 +19,7 @@
     "lil-gui": "^0.18.1",
     "stats-gl": "^1.0.5",
     "three": "^0.153.0",
-    "vercel": "^32.3.1"
+    "vercel": "^32.3.1",
+    "vite-plugin-glsl": "^1.1.2"
   }
 }
