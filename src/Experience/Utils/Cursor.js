@@ -29,12 +29,13 @@ export default class Cursor {
       ySetBallBig(posB.y);
     });
 
-    const btnMusic = document.querySelector(".btn-music");
-    btnMusic.addEventListener("mouseenter", () => {
-      cursor.classList.remove("big");
-    });
-    btnMusic.addEventListener("mouseleave", () => {
-      cursor.classList.add("big");
+    document.querySelectorAll(".hoverable").forEach((item) => {
+      item.addEventListener("mouseenter", () => {
+        cursor.classList.remove("big");
+      });
+      item.addEventListener("mouseleave", () => {
+        cursor.classList.add("big");
+      });
     });
   }
 }
