@@ -7,7 +7,7 @@ import Rainbow from "./Rainbow.js";
 import Title3D from "./Title3D.js";
 import Butterflies from "./Butterflies.js";
 import Stats from "stats-gl";
-import ExperienceStats from "../Utils/ExperienceStats.js";
+// import ExperienceStats from "../Utils/ExperienceStats.js";
 import ClothPlane from "./ClothPlane.js";
 import CutiPlaneImagesTitle from "./CutiPlaneImagesTitle.js";
 import CutiVideos from "./CutiVideos.js";
@@ -33,7 +33,7 @@ export default class World {
       this.butterflies = new Butterflies(this);
       this.cutiPlaneImages = new CutiPlaneImages(this);
       this.rainbow = new Rainbow(this);
-      this.stats = new ExperienceStats(this);
+      // this.stats = new ExperienceStats(this);
       this.clothPlane = new ClothPlane(this);
       this.cutiVideos = new CutiVideos(this);
       this.cutiSonImages = new CutiSonImages(this);
