@@ -16,6 +16,7 @@ export default class Camera {
     this.cursorElement = document.querySelector(".cursor");
     this.btnNextElement = document.querySelector(".btn-next");
     this.btnMusic = document.querySelector(".btn-music");
+    this.btnCredits = document.querySelector(".btn-credits");
 
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -46,7 +47,14 @@ export default class Camera {
     let position = 0;
 
     window.addEventListener("mouseup", (event) => {
-      if (conditionsToMoveCamera(event.target, this.btnMusic, this.isMobile)) {
+      if (
+        conditionsToMoveCamera(
+          event.target,
+          this.btnMusic,
+          this.btnCredits,
+          this.isMobile
+        )
+      ) {
         switch (position) {
           case 0:
             // cuti images title
@@ -82,14 +90,18 @@ export default class Camera {
       }
     });
 
-    function isInsideBtnMusic(target) {
-      if (target.closest(".stop") || target.closest(".play")) {
+    function isInsideBtns(target) {
+      if (
+        target.closest(".stop") ||
+        target.closest(".play") ||
+        target.closest(".credits-title")
+      ) {
         return true;
       }
       return false;
     }
 
-    function conditionsToMoveCamera(target, btnMusic, isMobile) {
+    function conditionsToMoveCamera(target, btnMusic, btnCredits, isMobile) {
       if (isMobile === true) {
         if (target.closest(".btn-next")) {
           return true;
@@ -97,7 +109,7 @@ export default class Camera {
         return false;
       } else {
         if (
-          isInsideBtnMusic(target) === false &&
+          isInsideBtns(target) === false &&
           btnMusic.style.display === "block"
         ) {
           return true;
