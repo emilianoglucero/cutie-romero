@@ -1,0 +1,41 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("../images/credits/pink.jpeg");
+}
+
+main {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px;
+  text-align: center;
+  border: 22px double linen;
+  background: mediumpurple;
+  color: antiquewhite;
+  opacity: 0.95;
+}
+
+.cuti-image-container {
+  width: 270px;
+  height: 336px;
+  border: 4px groove linen;
+}
+
+ul {
+  text-align: justify;
+}
+li {
+  padding-bottom: 12px;
+  list-style-image: url("../images/credits/bullet_heart.gif");
+}
+
+@media only screen and (max-width: 992px) {
+  main {
+    width: 80%;
+    padding: 12px;
+    border: 18px double linen;
+  }
+}
