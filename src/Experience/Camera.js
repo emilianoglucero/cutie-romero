@@ -44,7 +44,7 @@ export default class Camera {
   setOrbitControls() {
     let position = 0;
 
-    window.addEventListener("mouseup", (event) => {
+    window.addEventListener("click", (event) => {
       if (
         conditionsToMoveCamera(event.target, this.btnMusic, this.btnCredits)
       ) {
@@ -85,9 +85,9 @@ export default class Camera {
 
     function isInsideBtns(target) {
       if (
-        target.closest(".stop") ||
-        target.closest(".play") ||
-        target.closest(".credits-title")
+        target.matches(".stop") ||
+        target.matches(".play") ||
+        target.matches(".credits-title")
       ) {
         return true;
       }
@@ -95,10 +95,12 @@ export default class Camera {
     }
 
     function conditionsToMoveCamera(target, btnMusic, btnCredits) {
-      alert(isMobileWithTouch());
-      alert(target.closest(".btn-next"));
+      // alert(isMobileWithTouch());
+      // alert(target.matches(".btn-next-text"));
+      // console.log(target.closest(".btn-next-text"));
+      // console.log(target.matches(".btn-next-text"));
       if (isMobileWithTouch()) {
-        if (target.closest(".btn-next")) {
+        if (target.matches(".btn-next-text")) {
           return true;
         }
         return false;
