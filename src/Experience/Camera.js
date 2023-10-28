@@ -96,6 +96,7 @@ export default class Camera {
 
     function conditionsToMoveCamera(target, btnMusic, btnCredits) {
       alert(isMobileWithTouch());
+      alert(target.closest(".btn-next"));
       if (isMobileWithTouch()) {
         if (target.closest(".btn-next")) {
           return true;
