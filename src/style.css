@@ -111,6 +111,7 @@ body {
   position: fixed;
   top: 0;
   right: -85%;
+  cursor: pointer;
 }
 
 @keyframes move {
