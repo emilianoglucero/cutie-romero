@@ -89,6 +89,14 @@ body {
   transition: 0.3s;
 }
 
+/*override default button styles*/
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
 .btn-next {
   display: none;
   animation: move 6s ease infinite;
@@ -105,12 +113,14 @@ body {
   color: #feb0ff;
   font-size: 14px;
   opacity: 0.9;
+  cursor: pointer;
 }
 
-.btn-next p {
+.btn-next span {
   position: fixed;
   top: 0;
   right: -85%;
+  cursor: pointer;
 }
 
 @keyframes move {
@@ -172,7 +182,7 @@ body {
   animation: move 6s ease infinite;
 }
 
-.btn-credits p {
+.btn-credits span {
   position: fixed;
   top: 4px;
   right: -80%;

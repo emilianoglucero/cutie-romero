@@ -18,8 +18,6 @@ export default class Camera {
     this.btnMusic = document.querySelector(".btn-music");
     this.btnCredits = document.querySelector(".btn-credits");
 
-    this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
     this.setInstance();
     this.setOrbitControls();
   }
@@ -46,14 +44,9 @@ export default class Camera {
   setOrbitControls() {
     let position = 0;
 
-    window.addEventListener("mouseup", (event) => {
+    window.addEventListener("click", (event) => {
       if (
-        conditionsToMoveCamera(
-          event.target,
-          this.btnMusic,
-          this.btnCredits,
-          this.isMobile
-        )
+        conditionsToMoveCamera(event.target, this.btnMusic, this.btnCredits)
       ) {
         switch (position) {
           case 0:
@@ -92,18 +85,18 @@ export default class Camera {
 
     function isInsideBtns(target) {
       if (
-        target.closest(".stop") ||
-        target.closest(".play") ||
-        target.closest(".credits-title")
+        target.matches(".stop") ||
+        target.matches(".play") ||
+        target.matches(".credits-title")
       ) {
         return true;
       }
       return false;
     }
 
-    function conditionsToMoveCamera(target, btnMusic, btnCredits, isMobile) {
-      if (isMobile === true) {
-        if (target.closest(".btn-next")) {
+    function conditionsToMoveCamera(target, btnMusic, btnCredits) {
+      if (isMobileWithTouch()) {
+        if (target.matches(".btn-next-text")) {
           return true;
         }
         return false;
@@ -116,6 +109,28 @@ export default class Camera {
         }
         return false;
       }
+    }
+
+    function isMobileWithTouch() {
+      // Check for touch event support
+      if (
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0 ||
+        navigator.msMaxTouchPoints > 0
+      ) {
+        return true;
+      }
+
+      // Check for the presence of certain keywords in the user agent
+      const userAgent = window.navigator.userAgent;
+      const keywords = ["Mobile", "Android", "iPhone", "iPad"];
+      for (const keyword of keywords) {
+        if (userAgent.indexOf(keyword) !== -1) {
+          return true;
+        }
+      }
+
+      return false;
     }
 
     // Debug
